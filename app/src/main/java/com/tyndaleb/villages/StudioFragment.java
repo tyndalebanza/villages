@@ -117,7 +117,7 @@ public class StudioFragment extends Fragment implements dashboardAdapter.EditLis
         });
 
         get_dashboard_list_url = AppConfig.URL_DASHBOARD_VILLAGE_LIST + "?user_id=" + userid + "&page=";
-        getData();
+       // getData();
         //Calling method to get data
         recyclerView.setOnScrollChangeListener(new RecyclerView.OnScrollChangeListener() {
             @Override
@@ -225,6 +225,15 @@ public class StudioFragment extends Fragment implements dashboardAdapter.EditLis
 
     }
 
-
+    @Override
+    public void onResume(){
+        super.onResume();
+        //OnResume Fragment
+        requestCount = 1;
+        myVillages.removeAll(myVillages);
+        adapter.notifyDataSetChanged();
+        // Log.d("THX",get_village_thread);
+        getData();
+    }
 
 }

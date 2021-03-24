@@ -57,7 +57,6 @@ public class VillageHomeActivity extends AppCompatActivity {
 
         progressDialog = new DelayedProgressDialog();
 
-        // SqLite database handler
         db = new SQLiteHandler(VillageHomeActivity.this.getApplicationContext());
 
         // session manager
@@ -67,12 +66,6 @@ public class VillageHomeActivity extends AppCompatActivity {
 
         user_id = user.get("uid");
 
-
-        url_fetch_village = AppConfig.URL_VILLAGE_HOME + "?village_id=" + village_id  ;
-
-        requestQueue = Volley.newRequestQueue(VillageHomeActivity.this);
-
-        fetchVillage();
 
         village_profile_photo.setOnClickListener(new View.OnClickListener() {
 
@@ -170,6 +163,21 @@ public class VillageHomeActivity extends AppCompatActivity {
                 0, android.R.drawable
                         .ic_dialog_alert));
         imageView.setImageUrl(url, imageLoader);
+
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        //here...
+        // SqLite database handler
+
+
+        url_fetch_village = AppConfig.URL_VILLAGE_HOME + "?village_id=" + village_id  ;
+
+        requestQueue = Volley.newRequestQueue(VillageHomeActivity.this);
+
+        fetchVillage();
 
     }
 
