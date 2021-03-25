@@ -53,6 +53,21 @@ public class VillageHomeActivity extends AppCompatActivity {
         village_profile_photo = (NetworkImageView) findViewById(R.id.home_image);
         ImageView btnClose = (ImageView) findViewById(R.id.close);
 
+        ImageView history_pen = (ImageView) findViewById(R.id.history_pen);
+        ImageView chieftainship_pen = (ImageView) findViewById(R.id.chieftainship_pen);
+        ImageView tribe_pen = (ImageView) findViewById(R.id.tribe_pen);
+        ImageView language_pen = (ImageView) findViewById(R.id.language_pen);
+        ImageView traditions_pen = (ImageView) findViewById(R.id.traditions_pen);
+        ImageView cuisine_pen = (ImageView) findViewById(R.id.cuisine_pen);
+        ImageView farming_pen = (ImageView) findViewById(R.id.farming_pen);
+        ImageView architecture_pen = (ImageView) findViewById(R.id.architecture_pen);
+        ImageView dressing_pen = (ImageView) findViewById(R.id.dressing_pen);
+        ImageView outdoor_scenery_pen = (ImageView) findViewById(R.id.outdoor_scenery_pen);
+        ImageView art_and_craft_pen = (ImageView) findViewById(R.id.art_and_craft_pen);
+        ImageView wildlife_pen = (ImageView) findViewById(R.id.wildlife_pen);
+        ImageView events_pen = (ImageView) findViewById(R.id.events_pen);
+
+
         village_id = getIntent().getIntExtra("EXTRA_VILLAGE_ID",0);
 
         progressDialog = new DelayedProgressDialog();
@@ -79,6 +94,21 @@ public class VillageHomeActivity extends AppCompatActivity {
 
 
         });
+
+        history_pen.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+                // Check for empty data in the form
+                Intent intent = new Intent(VillageHomeActivity.this,
+                        EditListActivity.class);
+                intent.putExtra("EXTRA_VILLAGE_ID", String.valueOf(village_id));
+                intent.putExtra("EXTRA_CATEGORY", "History");
+                startActivity(intent);
+                // finish() ;
+
+            }
+        });
+
 
         btnClose.setOnClickListener(new View.OnClickListener() {
 
