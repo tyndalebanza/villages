@@ -51,6 +51,20 @@ public class EditListActivity extends AppCompatActivity {
             }
         });
 
+        edit_image.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+                // Check for empty data in the form
+                Intent intent = new Intent(EditListActivity.this,
+                        EditPhotoActivity.class);
+                intent.putExtra("EXTRA_VILLAGE_ID", village_id);
+                intent.putExtra("EXTRA_CATEGORY", category);
+                startActivity(intent);
+                // finish() ;
+
+            }
+        });
+
 
     }
 }
