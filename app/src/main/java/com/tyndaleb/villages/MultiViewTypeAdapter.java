@@ -274,6 +274,45 @@ public class MultiViewTypeAdapter extends RecyclerView.Adapter<RecyclerView.View
                     ((ImageTypeViewHolder) holder).image.setImageUrl(object.image, imageLoader);
                     String str01 = "Submitted by " + object.fullname ;
                     ((ImageTypeViewHolder) holder).username.setText(str01);
+                    ((ImageTypeViewHolder) holder).likes.setOnClickListener(new View.OnClickListener(){
+                        @Override
+                        public void onClick(View v) {
+                            /// button click event
+
+                            if(object.like_id == 0 ){
+                                ((ImageTypeViewHolder) holder).likes.setImageResource(R.drawable.thumbs_up_blue) ;
+                                ((ImageTypeViewHolder) holder).no_of_likes.setText(String.valueOf(object.likes + 1));
+                                object.like_id = 1 ;
+                                updateFav( object.village_thread_id,user_id);
+                            }
+
+
+                        }
+                    });
+                    if(object.like_id  > 0 ){
+                        ((ImageTypeViewHolder) holder).likes.setImageResource(R.drawable.thumbs_up_blue) ;
+                    }
+                    if(object.likes < 1000 ) {
+                        ((ImageTypeViewHolder) holder).no_of_likes.setText(String.valueOf(object.likes));
+                    } else{
+                        ((ImageTypeViewHolder) holder).no_of_likes.setText(String.valueOf(object.likes/1000) + "K");
+                    }
+                    ((ImageTypeViewHolder) holder).comments.setOnClickListener(new View.OnClickListener(){
+                        @Override
+                        public void onClick(View v) {
+                            /// button click event
+
+                            Intent intent = new Intent(mContext, ChatBoxActivity.class);
+                            intent.putExtra("extra_thread_id", object.village_thread_id);
+                            mContext.startActivity(intent);
+
+                        }
+                    });
+                    if(object.comments < 1000 ) {
+                        ((ImageTypeViewHolder) holder).no_of_comments.setText(String.valueOf(object.comments));
+                    } else{
+                        ((ImageTypeViewHolder) holder).no_of_comments.setText(String.valueOf(object.comments/1000) + "K");
+                    }
                     ((ImageTypeViewHolder) holder).imgDelete.setOnClickListener(new View.OnClickListener() {
                         //@Override
                         public void onClick(View v) {
