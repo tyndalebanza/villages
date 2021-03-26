@@ -250,12 +250,12 @@ public class EditListActivity extends AppCompatActivity implements  MultiViewTyp
 
     public void onEditClicked(int village_thread_id, String write_up){
 
-      /*  Intent intent = new Intent(EditListActivity.this,
+        Intent intent = new Intent(EditListActivity.this,
                 EditWriteUpActivity.class);
         intent.putExtra("EXTRA_VILLAGE_THREAD_ID", String.valueOf(village_thread_id));
         intent.putExtra("EXTRA_WRITE_UP", write_up);
 
-        startActivity(intent); */
+        startActivity(intent);
     }
 
 }

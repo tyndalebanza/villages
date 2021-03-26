@@ -1,6 +1,7 @@
 package com.tyndaleb.villages;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.media.MediaPlayer;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,12 +9,21 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
+import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class MultiViewTypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -145,14 +155,128 @@ public class MultiViewTypeAdapter extends RecyclerView.Adapter<RecyclerView.View
                     ((TextTypeViewHolder) holder).txtEdit.setText(object.write_up);
                     String str = "Submitted by " + object.fullname ;
                     ((TextTypeViewHolder) holder).username.setText(str);
+                    ((TextTypeViewHolder) holder).edit.setOnClickListener(new View.OnClickListener() {
+                        //@Override
+                        public void onClick(View v) {
+
+                            if(user_id.equals(String.valueOf(object.user_id))) {
+                                // toggle  the imageview  number , set the selected one and the rest to zero
+                                listener.onEditClicked(object.village_thread_id, object.write_up);
+                                // Log.d("KANYE","KANYE");
+                            } else {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                                builder.setTitle("Edit Error Message");
+                                builder.setMessage("You cannot edit an article that you did not author.");
+                                builder.setPositiveButton("OK", null);
+                                //builder.setNegativeButton("Cancel", null);
+                                builder.create().show();
+                            }
+
+
+                        }
+                    });
+                    ((TextTypeViewHolder) holder).delete.setOnClickListener(new View.OnClickListener() {
+                        //@Override
+                        public void onClick(View v) {
+
+                            if(user_id.equals(String.valueOf(object.user_id))) {
+
+                                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+
+                                //builder.setTitle("Dlete ");
+                                builder.setMessage("Delete Article ?")
+                                        .setCancelable(false)
+                                        .setPositiveButton("CONFIRM",
+                                                new DialogInterface.OnClickListener() {
+                                                    public void onClick(DialogInterface dialog, int id) {
+                                                        //item_id = Video.getVideo_id() ;
+
+                                                        dataSet.remove(listPosition);
+                                                        notifyItemRemoved(listPosition);
+                                                        // toggle  the imageview  number , set the selected one and the rest to zero
+                                                        deletePost( String.valueOf(object.village_thread_id));
+
+
+                                                    }
+                                                })
+                                        .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int id) {
+
+
+                                            }
+                                        });
+
+                                builder.show();
+
+
+
+                            } else {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                                builder.setTitle("Edit Error Message");
+                                builder.setMessage("You cannot delete an article that you did not author.");
+                                builder.setPositiveButton("OK", null);
+                                //builder.setNegativeButton("Cancel", null);
+                                builder.create().show();
+                            }
+
+
+                        }
+                    });
                     break;
                 case village_item.IMAGE_TYPE:
                     ((ImageTypeViewHolder) holder).txtCaption.setText(object.caption);
                     imageLoader = CustomVolleyRequest.getInstance(mContext).getImageLoader();
-                    imageLoader.get(object.image, ImageLoader.getImageListener(((ImageTypeViewHolder) holder).image, R.mipmap.ic_launcher, android.R.drawable.ic_dialog_alert));
+                    imageLoader.get(object.image, ImageLoader.getImageListener(((ImageTypeViewHolder) holder).image, R.drawable.loading, R.drawable.loading));
                     ((ImageTypeViewHolder) holder).image.setImageUrl(object.image, imageLoader);
                     String str01 = "Submitted by " + object.fullname ;
                     ((ImageTypeViewHolder) holder).username.setText(str01);
+                    ((ImageTypeViewHolder) holder).imgDelete.setOnClickListener(new View.OnClickListener() {
+                        //@Override
+                        public void onClick(View v) {
+
+                            if(user_id.equals(String.valueOf(object.user_id))) {
+
+                                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+
+                                //builder.setTitle("Dlete ");
+                                builder.setMessage("Delete Photo ?")
+                                        .setCancelable(false)
+                                        .setPositiveButton("CONFIRM",
+                                                new DialogInterface.OnClickListener() {
+                                                    public void onClick(DialogInterface dialog, int id) {
+                                                        //item_id = Video.getVideo_id() ;
+
+                                                        dataSet.remove(listPosition);
+                                                        notifyItemRemoved(listPosition);
+                                                        // toggle  the imageview  number , set the selected one and the rest to zero
+                                                        deletePost( String.valueOf(object.village_thread_id));
+
+
+                                                    }
+                                                })
+                                        .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int id) {
+
+
+                                            }
+                                        });
+
+                                builder.show();
+
+
+
+                            } else {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                                builder.setTitle("Edit Error Message");
+                                builder.setMessage("You cannot delete a photo that you did not upload.");
+                                builder.setPositiveButton("OK", null);
+                                //builder.setNegativeButton("Cancel", null);
+                                builder.create().show();
+                            }
+
+
+                        }
+                    });
                     break;
             }
         }
@@ -168,6 +292,83 @@ public class MultiViewTypeAdapter extends RecyclerView.Adapter<RecyclerView.View
     interface EditItemClickedListener {
         void onEditClicked(int village_thread_id, String write_up);
     }
+
+    public  void deletePost( final String village_thread_id   )  {
+        // Tag used to cancel the request
+        String tag_string_req = "req_register";
+
+        StringRequest strReq = new StringRequest(Request.Method.POST, AppConfig.URL_DELETE_MY_POST, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                // //Log.d(TAG, "Register Response: " + response.toString());
+                // hideDialog();
+
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    boolean error = jObj.getBoolean("error");
+                    if (!error) {
+
+
+                        // btnFollow.setText("Follow ");
+                        // follow_count = 0 ;
+
+                    } else {
+                        // progressDialog.cancel();
+                        // Error occurred in registration. Get the error
+                        // message
+                        String errorMsg = jObj.getString("error_msg");
+                        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                        builder.setTitle("Network Error Message");
+                        builder.setMessage("Network Error , please try again");
+                        builder.setPositiveButton("OK", null);
+                        //builder.setNegativeButton("Cancel", null);
+                        builder.create().show();
+                    }
+                } catch (JSONException e) {
+
+                    e.printStackTrace();
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                    builder.setTitle("Network Error Message");
+                    builder.setMessage("Network Error , please try again");
+                    builder.setPositiveButton("OK", null);
+                    //builder.setNegativeButton("Cancel", null);
+                    builder.create().show();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                builder.setTitle("Network Error Message");
+                builder.setMessage("Network Error , please try again");
+                builder.setPositiveButton("OK", null);
+                //builder.setNegativeButton("Cancel", null);
+                builder.create().show();
+
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting params to register url
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("village_thread_id", village_thread_id );
+
+
+                return params;
+            }
+
+        };
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+    }
+
 
 }
 
