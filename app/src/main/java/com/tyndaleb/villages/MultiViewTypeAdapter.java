@@ -2,7 +2,9 @@ package com.tyndaleb.villages;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.media.MediaPlayer;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +27,8 @@ import java.util.Map;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
+
+import static com.tyndaleb.villages.AppController.TAG;
 
 public class MultiViewTypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -155,6 +159,46 @@ public class MultiViewTypeAdapter extends RecyclerView.Adapter<RecyclerView.View
                     ((TextTypeViewHolder) holder).txtEdit.setText(object.write_up);
                     String str = "Submitted by " + object.fullname ;
                     ((TextTypeViewHolder) holder).username.setText(str);
+
+                    ((TextTypeViewHolder) holder).comments.setOnClickListener(new View.OnClickListener(){
+                        @Override
+                        public void onClick(View v) {
+                            /// button click event
+
+                            Intent intent = new Intent(mContext, ChatBoxActivity.class);
+                            intent.putExtra("extra_thread_id", object.village_thread_id);
+                            mContext.startActivity(intent);
+
+                        }
+                    });
+                    ((TextTypeViewHolder) holder).likes.setOnClickListener(new View.OnClickListener(){
+                        @Override
+                        public void onClick(View v) {
+                            /// button click event
+
+                            if(object.like_id == 0 ){
+                                ((TextTypeViewHolder) holder).likes.setImageResource(R.drawable.thumbs_up_blue) ;
+                                ((TextTypeViewHolder) holder).no_of_likes.setText(String.valueOf(object.likes + 1));
+                                object.like_id = 1 ;
+                                updateFav( object.village_thread_id,user_id);
+                            }
+
+
+                        }
+                    });
+                    if(object.like_id  > 0 ){
+                        ((TextTypeViewHolder) holder).likes.setImageResource(R.drawable.thumbs_up_blue) ;
+                    }
+                    if(object.likes < 1000 ) {
+                        ((TextTypeViewHolder) holder).no_of_likes.setText(String.valueOf(object.likes));
+                    } else{
+                        ((TextTypeViewHolder) holder).no_of_likes.setText(String.valueOf(object.likes/1000) + "K");
+                    }
+                    if(object.comments < 1000 ) {
+                        ((TextTypeViewHolder) holder).no_of_comments.setText(String.valueOf(object.comments));
+                    } else{
+                        ((TextTypeViewHolder) holder).no_of_comments.setText(String.valueOf(object.comments/1000) + "K");
+                    }
                     ((TextTypeViewHolder) holder).edit.setOnClickListener(new View.OnClickListener() {
                         //@Override
                         public void onClick(View v) {
@@ -368,6 +412,88 @@ public class MultiViewTypeAdapter extends RecyclerView.Adapter<RecyclerView.View
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
+
+    private void updateFav( final int thread_id  , final String user_id ) {
+
+        // Tag used to cancel the request
+        String tag_string_req = "req_new_item";
+
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                AppConfig.URL_UPDATE_FAV, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    boolean error = jObj.getBoolean("error");
+
+                    // Check for error node in json
+                    if (!error) {
+
+                        //Start New Activity
+                    } else {
+                        // Error in login. Get the error message
+                        String errorMsg = jObj.getString("error_msg");
+                        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                        builder.setTitle("Network Error Message");
+                        builder.setMessage("Network Error , please try again");
+                        builder.setPositiveButton("OK", null);
+                        //builder.setNegativeButton("Cancel", null);
+                        builder.create().show();
+
+                    }
+                } catch (JSONException e) {
+                    // JSON error
+                    e.printStackTrace();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                    builder.setTitle("Network Error Message");
+                    builder.setMessage("Network Error , please try again");
+                    builder.setPositiveButton("OK", null);
+                    //builder.setNegativeButton("Cancel", null);
+                    builder.create().show();
+
+
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+               // Log.e(TAG, "Login Error: " + error.getMessage());
+                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                builder.setTitle("Network Error Message");
+                builder.setMessage("Network Error , please try again");
+                builder.setPositiveButton("OK", null);
+                //builder.setNegativeButton("Cancel", null);
+                builder.create().show();
+
+
+                // hideDialog();
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+
+
+                String str_village_thread_id = String.valueOf(thread_id) ;
+                // String str_user_id = String.valueOf(user_id) ;
+
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("village_thread_id", str_village_thread_id);
+                params.put("user_id", user_id);
+
+                return params;
+            }
+
+        };
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+    }
+
 
 
 }
