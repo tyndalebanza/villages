@@ -32,6 +32,7 @@ public class AppConfig {
     public static  String URL_UPDATE_USER_VIEW_DATE = "http://52.63.139.107/scripts/insert_article_view_history.php" ;
     public static  String URL_SEARCH_VILLAGE_BY_USER = "http://52.63.139.107/scripts/fetch_search_village.php" ;
     public static String URL_UPDATE_FAV = "http://52.63.139.107/scripts/update_fav.php";
+    public static String URL_VILLAGE_LED ="http://52.63.139.107/scripts/fetch_village_led.php";
 
 
 }
