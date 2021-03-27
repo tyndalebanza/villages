@@ -35,6 +35,9 @@ public class AppConfig {
     public static String URL_UPDATE_FAV = "http://52.63.139.107/scripts/update_fav.php";
     public static String URL_VILLAGE_LED ="http://52.63.139.107/scripts/fetch_village_led.php";
     public static String URL_TRENDING_VILLAGE ="http://52.63.139.107/scripts/village_trending.php";
+    public static String URL_QUERY_MY_FOLLOWING = "http://52.63.139.107/scripts/fetch_follow_count.php" ;
+    public static String URL_INSERT_FOLLOW = "http://52.63.139.107/scripts/insert_follow.php" ;
+    public static String URL_DELETE_FOLLOW = "http://52.63.139.107/scripts/delete_follower.php" ;
 
 
 }

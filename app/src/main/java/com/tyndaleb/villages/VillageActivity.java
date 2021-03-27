@@ -6,15 +6,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -23,6 +26,7 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.Map;
 
 public class VillageActivity extends AppCompatActivity {
 
@@ -37,6 +41,7 @@ public class VillageActivity extends AppCompatActivity {
     private  String url_fetch_village ;
     private String village_name;
     private String url_fetch_led ;
+    private String url_follow ;
 
     //private RequestQueue requestQueue;
     private ImageLoader imageLoader;
@@ -61,6 +66,10 @@ public class VillageActivity extends AppCompatActivity {
     private ImageView wildlife_led ;
     private ImageView events_led ;
 
+    private Button follow_button;
+
+    private int follow_count ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +79,7 @@ public class VillageActivity extends AppCompatActivity {
         txt_province_country_name = (TextView) findViewById(R.id.StateCountry);
         village_profile_photo = (NetworkImageView) findViewById(R.id.home_image);
         ImageView btnBack = (ImageView) findViewById(R.id.btnBack);
+        follow_button = (Button) findViewById(R.id.btnFollow);
 
         TextView history = (TextView) findViewById(R.id.history);
         TextView chieftainship = (TextView) findViewById(R.id.chieftainship);
@@ -307,6 +317,22 @@ public class VillageActivity extends AppCompatActivity {
 
         });
 
+        follow_button.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+                // Check for empty data in the form
+                String follow ;
+
+                if(follow_count == 0 ){
+                    follow_button.setText("unfollow");
+                    following( String.valueOf(village_id) ,user_id  );
+                }  else {
+                    follow_button.setText("follow");
+                    unfollow( String.valueOf(village_id) ,user_id  );
+                }
+
+            }
+        });
 
     }
 
@@ -396,9 +422,13 @@ public class VillageActivity extends AppCompatActivity {
 
         url_fetch_led = AppConfig.URL_VILLAGE_LED + "?village_id=" + village_id  ;
 
+        url_follow = AppConfig.URL_QUERY_MY_FOLLOWING + "?village_id=" + village_id + "&follower_id=" + user_id  ;
+
+
         requestQueue = Volley.newRequestQueue(VillageActivity.this);
 
         fetchVillage();
+        toggleFollow(url_follow );
 
     }
 
@@ -498,6 +528,223 @@ public class VillageActivity extends AppCompatActivity {
 
 // Access the RequestQueue through your singleton class.
         requestQueue.add(jsObjRequest);
+    }
+
+    private void toggleFollow( final String url_follow) {
+
+
+        JsonObjectRequest jsObjRequest = new JsonObjectRequest
+                (url_follow,null, new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        ////Log.d("Response: ", response.toString());
+
+                        try {
+                            JSONArray categoryArray = response.getJSONArray("result");
+
+                            for (int i = 0; i < categoryArray.length(); i++) {
+                                JSONObject categoryItem = (JSONObject) categoryArray.get(i);
+                                follow_count = categoryItem.getInt("follow_count");
+
+                                if(follow_count == 0 ){
+                                    follow_button.setText("follow") ;
+                                }  else {
+                                    follow_button.setText("unfollow") ;
+                                }
+
+                            }
+
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            AlertDialog.Builder builder = new AlertDialog.Builder(VillageActivity.this);
+                            builder.setTitle("Network Error Message");
+                            builder.setMessage("Network Error , please try again");
+                            builder.setPositiveButton("OK", null);
+                            //builder.setNegativeButton("Cancel", null);
+                            builder.create().show();
+
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // TODO Auto-generated method stub
+                        AlertDialog.Builder builder = new AlertDialog.Builder(VillageActivity.this);
+                        builder.setTitle("Network Error Message");
+                        builder.setMessage("Network Error , please try again");
+                        builder.setPositiveButton("OK", null);
+                        //builder.setNegativeButton("Cancel", null);
+                        builder.create().show();
+
+
+                    }
+                });
+
+// Access the RequestQueue through your singleton class.
+        requestQueue.add(jsObjRequest);
+    }
+
+    private void following(  final String village_id ,final String follower_id  ) {
+        // Tag used to cancel the request
+        String tag_string_req = "req_register";
+
+
+
+        StringRequest strReq = new StringRequest(Request.Method.POST, AppConfig.URL_INSERT_FOLLOW, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                // //Log.d(TAG, "Register Response: " + response.toString());
+
+
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    boolean error = jObj.getBoolean("error");
+                    if (!error) {
+
+
+
+                        follow_count = 1 ;
+
+                    } else {
+
+                        // Error occurred in registration. Get the error
+                        // message
+                        AlertDialog.Builder builder = new AlertDialog.Builder(VillageActivity.this);
+                        builder.setTitle("Network Error Message");
+                        builder.setMessage("Network Error , please try again");
+                        builder.setPositiveButton("OK", null);
+                        //builder.setNegativeButton("Cancel", null);
+                        builder.create().show();
+
+
+                    }
+                } catch (JSONException e) {
+
+                    e.printStackTrace();
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(VillageActivity.this);
+                    builder.setTitle("Network Error Message");
+                    builder.setMessage("Network Error , please try again");
+                    builder.setPositiveButton("OK", null);
+                    //builder.setNegativeButton("Cancel", null);
+                    builder.create().show();
+
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(VillageActivity.this);
+                builder.setTitle("Network Error Message");
+                builder.setMessage("Network Error , please try again");
+                builder.setPositiveButton("OK", null);
+                //builder.setNegativeButton("Cancel", null);
+                builder.create().show();
+
+
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting params to register url
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("village_id", village_id );
+                params.put("follower_id", follower_id);
+
+                return params;
+            }
+
+        };
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+    }
+    private void unfollow(  final String village_id ,final String follower_id  ) {
+        // Tag used to cancel the request
+        String tag_string_req = "req_register";
+
+
+
+        StringRequest strReq = new StringRequest(Request.Method.POST, AppConfig.URL_DELETE_FOLLOW, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                // //Log.d(TAG, "Register Response: " + response.toString());
+
+
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    boolean error = jObj.getBoolean("error");
+                    if (!error) {
+
+                        follow_count = 0 ;
+
+                    } else {
+
+                        // Error occurred in registration. Get the error
+                        // message
+                        String errorMsg = jObj.getString("error_msg");
+                        AlertDialog.Builder builder = new AlertDialog.Builder(VillageActivity.this);
+                        builder.setTitle("Network Error Message");
+                        builder.setMessage("Network Error , please try again");
+                        builder.setPositiveButton("OK", null);
+                        //builder.setNegativeButton("Cancel", null);
+                        builder.create().show();
+
+
+                    }
+                } catch (JSONException e) {
+
+                    e.printStackTrace();
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(VillageActivity.this);
+                    builder.setTitle("Network Error Message");
+                    builder.setMessage("Network Error , please try again");
+                    builder.setPositiveButton("OK", null);
+                    //builder.setNegativeButton("Cancel", null);
+                    builder.create().show();
+
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(VillageActivity.this);
+                builder.setTitle("Network Error Message");
+                builder.setMessage("Network Error , please try again");
+                builder.setPositiveButton("OK", null);
+                //builder.setNegativeButton("Cancel", null);
+                builder.create().show();
+
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting params to register url
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("village_id", village_id );
+                params.put("follower_id",follower_id);
+
+                return params;
+            }
+
+        };
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
 
