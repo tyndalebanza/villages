@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="item_click_support" type="id"
+        />
+    <item type="id" name="layout1" />
+    <item name="sale_item_photo1" type="id"
+        />
+</resources>
