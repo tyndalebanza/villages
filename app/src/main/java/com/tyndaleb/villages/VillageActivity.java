@@ -118,7 +118,7 @@ public class VillageActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Check for empty data in the form
                 Intent intent = new Intent(VillageActivity.this,
-                        EditListActivity.class);
+                        VillageListActivity.class);
                 intent.putExtra("EXTRA_VILLAGE_ID", String.valueOf(village_id));
                 intent.putExtra("EXTRA_CATEGORY", "History");
                 startActivity(intent);
@@ -132,7 +132,7 @@ public class VillageActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Check for empty data in the form
                 Intent intent = new Intent(VillageActivity.this,
-                        EditListActivity.class);
+                        VillageListActivity.class);
                 intent.putExtra("EXTRA_VILLAGE_ID", String.valueOf(village_id));
                 intent.putExtra("EXTRA_CATEGORY", "Chieftainship");
                 startActivity(intent);
@@ -146,7 +146,7 @@ public class VillageActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Check for empty data in the form
                 Intent intent = new Intent(VillageActivity.this,
-                        EditListActivity.class);
+                        VillageListActivity.class);
                 intent.putExtra("EXTRA_VILLAGE_ID", String.valueOf(village_id));
                 intent.putExtra("EXTRA_CATEGORY", "Tribe");
                 startActivity(intent);
@@ -160,7 +160,7 @@ public class VillageActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Check for empty data in the form
                 Intent intent = new Intent(VillageActivity.this,
-                        EditListActivity.class);
+                        VillageListActivity.class);
                 intent.putExtra("EXTRA_VILLAGE_ID", String.valueOf(village_id));
                 intent.putExtra("EXTRA_CATEGORY", "Language");
                 startActivity(intent);
@@ -174,7 +174,7 @@ public class VillageActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Check for empty data in the form
                 Intent intent = new Intent(VillageActivity.this,
-                        EditListActivity.class);
+                        VillageListActivity.class);
                 intent.putExtra("EXTRA_VILLAGE_ID", String.valueOf(village_id));
                 intent.putExtra("EXTRA_CATEGORY", "Traditions");
                 startActivity(intent);
@@ -188,7 +188,7 @@ public class VillageActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Check for empty data in the form
                 Intent intent = new Intent(VillageActivity.this,
-                        EditListActivity.class);
+                        VillageListActivity.class);
                 intent.putExtra("EXTRA_VILLAGE_ID", String.valueOf(village_id));
                 intent.putExtra("EXTRA_CATEGORY", "Cuisine");
                 startActivity(intent);
@@ -202,7 +202,7 @@ public class VillageActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Check for empty data in the form
                 Intent intent = new Intent(VillageActivity.this,
-                        EditListActivity.class);
+                        VillageListActivity.class);
                 intent.putExtra("EXTRA_VILLAGE_ID", String.valueOf(village_id));
                 intent.putExtra("EXTRA_CATEGORY", "Farming");
                 startActivity(intent);
@@ -216,7 +216,7 @@ public class VillageActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Check for empty data in the form
                 Intent intent = new Intent(VillageActivity.this,
-                        EditListActivity.class);
+                        VillageListActivity.class);
                 intent.putExtra("EXTRA_VILLAGE_ID", String.valueOf(village_id));
                 intent.putExtra("EXTRA_CATEGORY", "Architecture");
                 startActivity(intent);
@@ -230,7 +230,7 @@ public class VillageActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Check for empty data in the form
                 Intent intent = new Intent(VillageActivity.this,
-                        EditListActivity.class);
+                        VillageListActivity.class);
                 intent.putExtra("EXTRA_VILLAGE_ID", String.valueOf(village_id));
                 intent.putExtra("EXTRA_CATEGORY", "Dressing");
                 startActivity(intent);
@@ -244,7 +244,7 @@ public class VillageActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Check for empty data in the form
                 Intent intent = new Intent(VillageActivity.this,
-                        EditListActivity.class);
+                        VillageListActivity.class);
                 intent.putExtra("EXTRA_VILLAGE_ID", String.valueOf(village_id));
                 intent.putExtra("EXTRA_CATEGORY", "Outdoor_Scenery");
                 startActivity(intent);
@@ -258,7 +258,7 @@ public class VillageActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Check for empty data in the form
                 Intent intent = new Intent(VillageActivity.this,
-                        EditListActivity.class);
+                        VillageListActivity.class);
                 intent.putExtra("EXTRA_VILLAGE_ID", String.valueOf(village_id));
                 intent.putExtra("EXTRA_CATEGORY", "Art_and_Craft");
                 startActivity(intent);
@@ -272,7 +272,7 @@ public class VillageActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Check for empty data in the form
                 Intent intent = new Intent(VillageActivity.this,
-                        EditListActivity.class);
+                        VillageListActivity.class);
                 intent.putExtra("EXTRA_VILLAGE_ID", String.valueOf(village_id));
                 intent.putExtra("EXTRA_CATEGORY", "Wildlife");
                 startActivity(intent);
@@ -286,7 +286,7 @@ public class VillageActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Check for empty data in the form
                 Intent intent = new Intent(VillageActivity.this,
-                        EditListActivity.class);
+                        VillageListActivity.class);
                 intent.putExtra("EXTRA_VILLAGE_ID", String.valueOf(village_id));
                 intent.putExtra("EXTRA_CATEGORY", "Events");
                 startActivity(intent);

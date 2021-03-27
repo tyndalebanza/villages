@@ -20,7 +20,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Villages"
         android:usesCleartextTraffic="true">
-        <activity android:name=".VillageActivity"></activity>
+        <activity android:name=".VillageListActivity"></activity>
+        <activity android:name=".VillageActivity" />
         <activity android:name=".ChatBoxActivity" />
         <activity android:name=".EditWriteUpActivity" />
         <activity android:name=".EditPhotoActivity" />
