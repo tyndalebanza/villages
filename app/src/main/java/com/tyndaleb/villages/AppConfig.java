@@ -12,6 +12,7 @@ public class AppConfig {
     public static String URL_REGISTER = "http://52.63.139.107/scripts/android_register.php";
 
     public static String URL_QUERY_DUPLICATE= "http://52.63.139.107/scripts/count_duplicate_village.php";
+    public static String URL_DUPLICATE_VILLAGE= "http://52.63.139.107/scripts/search_duplicate_village.php";
     public static String URL_REQUEST_PASSWORD  = "http://52.63.139.107/scripts/android_reset.php";
     public static String URL_NEW_VILLAGE = "http://52.63.139.107/scripts/create_village.php";
     public static String URL_VILLAGE_HOME = "http://52.63.139.107/scripts/fetch_village_counts.php";

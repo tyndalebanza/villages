@@ -32,7 +32,7 @@
         android:id="@+id/VillageMsg"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="It seems your village is already in the database. Click join to write articles for the village or continue to create a new village if you don't see your village below"
+        android:text="It seems your village is already in the database. Click &quot; Edit &quot; to write articles for the village or continue to create a new village if you don't see your village below"
         android:layout_marginTop="20dp"
         android:textSize="@dimen/_15sdp"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
@@ -53,6 +53,7 @@
         app:layout_constraintTop_toBottomOf="@+id/VillageMsg" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"

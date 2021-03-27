@@ -107,6 +107,13 @@ public class NewVillageActivity extends AppCompatActivity {
                          startActivity(intent);
                          finish() ;
 
+                    }else {
+                        Intent intent = new Intent(NewVillageActivity.this,
+                                DuplicateVillageActivity.class);
+                        intent.putExtra("EXTRA_VILLAGE_NAME", village_name.getText().toString());
+                        startActivity(intent);
+                        finish() ;
+
                     }
 
 
