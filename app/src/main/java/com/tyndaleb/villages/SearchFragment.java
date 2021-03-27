@@ -1,6 +1,7 @@
 package com.tyndaleb.villages;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -95,7 +96,12 @@ public class SearchFragment extends Fragment {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                 // do it
-                Log.d("THREAD",String.valueOf(adapter.getVillageId(position)));
+                // Log.d("THREAD",String.valueOf(adapter.getVillageId(position)));
+                Intent intent = new Intent(
+                        getActivity(),
+                        VillageActivity.class);
+                intent.putExtra("EXTRA_VILLAGE_ID", adapter.getVillageId(position));
+                startActivity(intent);
             }
         });
 

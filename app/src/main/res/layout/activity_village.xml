@@ -1,0 +1,554 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".VillageActivity">
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_left_01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="15dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_right_01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="15dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="80dp" />
+
+
+            <ImageView
+                android:id="@+id/btnBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/left_arrow_icon" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnFollow"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Follow"
+                android:background="@drawable/btn_follow"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_18sdp"
+                android:textAllCaps="false"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
+                app:layout_constraintTop_toBottomOf="@+id/btnBack" />
+
+            <TextView
+                android:id="@+id/VillageName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="Village Name"
+                android:textSize="@dimen/_20sdp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
+                app:layout_constraintTop_toBottomOf="@+id/btnFollow" />
+
+            <TextView
+                android:id="@+id/StateCountry"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="Province,Country"
+                android:textSize="@dimen/_15sdp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
+                app:layout_constraintTop_toBottomOf="@+id/VillageName" />
+
+            <com.android.volley.toolbox.NetworkImageView
+                android:id="@+id/home_image"
+                android:layout_width="0dp"
+                android:layout_height="230dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:scaleType="fitCenter"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/StateCountry" />
+
+            <View
+                android:id="@+id/line01"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/black"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
+                app:layout_constraintTop_toBottomOf="@+id/home_image" />
+
+            <TextView
+                android:id="@+id/history"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="History"
+                android:textSize="@dimen/_18sdp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/guideline_center"
+                app:layout_constraintTop_toBottomOf="@+id/line01" />
+
+            <View
+                android:id="@+id/line02"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/black"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
+                app:layout_constraintTop_toBottomOf="@+id/history" />
+
+
+            <ImageView
+                android:id="@+id/history_led"
+                android:layout_width="31dp"
+                android:layout_height="23dp"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintBottom_toBottomOf="@+id/line02"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_center"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
+                app:layout_constraintTop_toBottomOf="@+id/line01"
+                app:srcCompat="@drawable/grey_led" />
+
+            <TextView
+                android:id="@+id/chieftainship"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Chieftainship"
+                android:textSize="@dimen/_18sdp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/guideline_center"
+                app:layout_constraintTop_toBottomOf="@+id/line02" />
+
+            <View
+                android:id="@+id/line03"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/black"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
+                app:layout_constraintTop_toBottomOf="@+id/chieftainship" />
+
+            <ImageView
+                android:id="@+id/chieftainship_led"
+                android:layout_width="31dp"
+                android:layout_height="23dp"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintBottom_toBottomOf="@+id/line03"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_center"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
+                app:layout_constraintTop_toBottomOf="@+id/line02"
+                app:srcCompat="@drawable/grey_led" />
+
+            <TextView
+                android:id="@+id/tribe"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Tribe"
+                android:textSize="@dimen/_18sdp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/guideline_center"
+                app:layout_constraintTop_toBottomOf="@+id/line03" />
+
+            <View
+                android:id="@+id/line04"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/black"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
+                app:layout_constraintTop_toBottomOf="@+id/tribe" />
+
+            <ImageView
+                android:id="@+id/tribe_led"
+                android:layout_width="31dp"
+                android:layout_height="23dp"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintBottom_toBottomOf="@+id/line04"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_center"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
+                app:layout_constraintTop_toBottomOf="@+id/line03"
+                app:srcCompat="@drawable/grey_led" />
+
+            <TextView
+                android:id="@+id/language"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Language"
+                android:textSize="@dimen/_18sdp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/guideline_center"
+                app:layout_constraintTop_toBottomOf="@+id/line04" />
+
+            <View
+                android:id="@+id/line05"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/black"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
+                app:layout_constraintTop_toBottomOf="@+id/language" />
+
+            <ImageView
+                android:id="@+id/language_led"
+                android:layout_width="31dp"
+                android:layout_height="23dp"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintBottom_toBottomOf="@+id/line05"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_center"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
+                app:layout_constraintTop_toBottomOf="@+id/line04"
+                app:srcCompat="@drawable/grey_led" />
+
+            <TextView
+                android:id="@+id/traditions"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Traditions"
+                android:textSize="@dimen/_18sdp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/guideline_center"
+                app:layout_constraintTop_toBottomOf="@+id/line05" />
+
+            <View
+                android:id="@+id/line06"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/black"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
+                app:layout_constraintTop_toBottomOf="@+id/traditions" />
+
+            <ImageView
+                android:id="@+id/traditions_led"
+                android:layout_width="31dp"
+                android:layout_height="23dp"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintBottom_toBottomOf="@+id/line06"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_center"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
+                app:layout_constraintTop_toBottomOf="@+id/line05"
+                app:srcCompat="@drawable/grey_led" />
+
+            <TextView
+                android:id="@+id/cuisine"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Cuisine"
+                android:textSize="@dimen/_18sdp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/guideline_center"
+                app:layout_constraintTop_toBottomOf="@+id/line06" />
+
+            <View
+                android:id="@+id/line07"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/black"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
+                app:layout_constraintTop_toBottomOf="@+id/cuisine" />
+
+            <ImageView
+                android:id="@+id/cuisine_led"
+                android:layout_width="31dp"
+                android:layout_height="23dp"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintBottom_toBottomOf="@+id/line07"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_center"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
+                app:layout_constraintTop_toBottomOf="@+id/line06"
+                app:srcCompat="@drawable/grey_led" />
+
+            <TextView
+                android:id="@+id/farming"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Farming"
+                android:textSize="@dimen/_18sdp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/guideline_center"
+                app:layout_constraintTop_toBottomOf="@+id/line07" />
+
+            <View
+                android:id="@+id/line08"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/black"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
+                app:layout_constraintTop_toBottomOf="@+id/farming" />
+
+            <ImageView
+                android:id="@+id/farming_led"
+                android:layout_width="31dp"
+                android:layout_height="23dp"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintBottom_toBottomOf="@+id/line08"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_center"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
+                app:layout_constraintTop_toBottomOf="@+id/line07"
+                app:srcCompat="@drawable/grey_led" />
+
+            <TextView
+                android:id="@+id/architecture"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Architecture"
+                android:textSize="@dimen/_18sdp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/guideline_center"
+                app:layout_constraintTop_toBottomOf="@+id/line08" />
+
+            <View
+                android:id="@+id/line09"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/black"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
+                app:layout_constraintTop_toBottomOf="@+id/architecture" />
+
+            <ImageView
+                android:id="@+id/architecture_led"
+                android:layout_width="31dp"
+                android:layout_height="23dp"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintBottom_toBottomOf="@+id/line09"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_center"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
+                app:layout_constraintTop_toBottomOf="@+id/line08"
+                app:srcCompat="@drawable/grey_led" />
+
+            <TextView
+                android:id="@+id/dressing"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Dressing"
+                android:textSize="@dimen/_18sdp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/guideline_center"
+                app:layout_constraintTop_toBottomOf="@+id/line09" />
+
+            <View
+                android:id="@+id/line10"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/black"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
+                app:layout_constraintTop_toBottomOf="@+id/dressing" />
+
+            <ImageView
+                android:id="@+id/dressing_led"
+                android:layout_width="31dp"
+                android:layout_height="23dp"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintBottom_toBottomOf="@+id/line10"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_center"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
+                app:layout_constraintTop_toBottomOf="@+id/line09"
+                app:srcCompat="@drawable/grey_led" />
+
+            <TextView
+                android:id="@+id/outdoor_scenery"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Outdoor Scenery"
+                android:textSize="@dimen/_18sdp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/guideline_center"
+                app:layout_constraintTop_toBottomOf="@+id/line10" />
+
+            <View
+                android:id="@+id/line11"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/black"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
+                app:layout_constraintTop_toBottomOf="@+id/outdoor_scenery" />
+
+            <ImageView
+                android:id="@+id/outdoor_scenery_led"
+                android:layout_width="31dp"
+                android:layout_height="23dp"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintBottom_toBottomOf="@+id/line11"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_center"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
+                app:layout_constraintTop_toBottomOf="@+id/line10"
+                app:srcCompat="@drawable/grey_led" />
+
+            <TextView
+                android:id="@+id/art_and_craft"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Art and Craft"
+                android:textSize="@dimen/_18sdp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/guideline_center"
+                app:layout_constraintTop_toBottomOf="@+id/line11" />
+
+            <View
+                android:id="@+id/line12"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/black"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
+                app:layout_constraintTop_toBottomOf="@+id/art_and_craft" />
+
+            <ImageView
+                android:id="@+id/art_and_craft_led"
+                android:layout_width="31dp"
+                android:layout_height="23dp"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintBottom_toBottomOf="@+id/line12"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_center"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
+                app:layout_constraintTop_toBottomOf="@+id/line11"
+                app:srcCompat="@drawable/grey_led" />
+
+            <TextView
+                android:id="@+id/wildlife"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Wildlife"
+                android:textSize="@dimen/_18sdp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/guideline_center"
+                app:layout_constraintTop_toBottomOf="@+id/line12" />
+
+            <View
+                android:id="@+id/line13"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/black"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
+                app:layout_constraintTop_toBottomOf="@+id/wildlife" />
+
+            <ImageView
+                android:id="@+id/wildlife_led"
+                android:layout_width="31dp"
+                android:layout_height="23dp"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintBottom_toBottomOf="@+id/line13"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_center"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
+                app:layout_constraintTop_toBottomOf="@+id/line12"
+                app:srcCompat="@drawable/grey_led" />
+
+            <TextView
+                android:id="@+id/events"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Events"
+                android:textSize="@dimen/_18sdp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/guideline_center"
+                app:layout_constraintTop_toBottomOf="@+id/line13" />
+
+            <View
+                android:id="@+id/line14"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/black"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
+                app:layout_constraintTop_toBottomOf="@+id/events" />
+
+            <ImageView
+                android:id="@+id/events_led"
+                android:layout_width="31dp"
+                android:layout_height="23dp"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintBottom_toBottomOf="@+id/line14"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_center"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
+                app:layout_constraintTop_toBottomOf="@+id/line13"
+                app:srcCompat="@drawable/grey_led" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_pen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="80dp" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
