@@ -191,6 +191,10 @@ public class DuplicateVillageActivity extends AppCompatActivity implements dupli
                                 String v_state = categoryItem.getString("state");
                                 String v_image_url = categoryItem.getString("image");
 
+                                if (v_image_url.equals("null")){
+                                    v_image_url = "https://dq8rhf3zp6dxc.cloudfront.net/images/add_image.png";
+                                }
+
                                 village_dash village_dash = new village_dash(v_village_name , v_country ,v_state , v_village_id,v_image_url);
 
                                 myVillages.add(village_dash);
@@ -224,12 +228,12 @@ public class DuplicateVillageActivity extends AppCompatActivity implements dupli
     }
     public void onItemClicked(int village_id){
 
-      /*  Intent intent = new Intent(
-                getActivity(),
+       Intent intent = new Intent(
+                DuplicateVillageActivity.this,
                 VillageHomeActivity.class);
         intent.putExtra("EXTRA_VILLAGE_ID", village_id);
         startActivity(intent);
-        finish() */
+        finish() ;
 
     }
 
