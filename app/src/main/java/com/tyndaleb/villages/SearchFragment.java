@@ -117,7 +117,7 @@ public class SearchFragment extends Fragment {
 
                    Intent intent = new Intent(getActivity(),
                             VillageSearchActivity.class);
-                    intent.putExtra("extra_user_search", query);
+                    intent.putExtra("extra_village_search", query);
                     startActivity(intent);
 
 
