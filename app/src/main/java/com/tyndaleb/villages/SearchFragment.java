@@ -24,6 +24,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -48,7 +49,7 @@ public class SearchFragment extends Fragment {
     private String url_dashboard_message ;
     private String village_name ;
     private TextView banner ;
-
+    private SearchView searchView;
     private int requestCount = 1;
 
     private List<village_dash> myVillages;
@@ -91,6 +92,45 @@ public class SearchFragment extends Fragment {
 
         //Adding adapter to recyclerview
         recyclerView.setAdapter(adapter);
+
+        searchView=(SearchView) rootView.findViewById(R.id.searchView);
+        searchView.onActionViewExpanded();
+        searchView.clearFocus();
+        searchView.setQueryHint("Search Village");
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+
+                if (( query.length() == 1)|| ( query.length() == 0)){
+                    // Dialog Box to inform that there has to be at least  2  letters
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    builder.setTitle("Error Message");
+                    builder.setMessage("The search term must be at least 2 characters");
+                    builder.setPositiveButton("OK", null);
+                    //builder.setNegativeButton("Cancel", null);
+                    builder.create().show();
+
+                } else {
+
+                   Intent intent = new Intent(getActivity(),
+                            VillageSearchActivity.class);
+                    intent.putExtra("extra_user_search", query);
+                    startActivity(intent);
+
+
+                }
+
+                return false;
+            }
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
 
         ItemClickSupport.addTo(recyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
