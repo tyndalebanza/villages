@@ -96,7 +96,7 @@ public class SearchFragment extends Fragment {
         searchView=(SearchView) rootView.findViewById(R.id.searchView);
         searchView.onActionViewExpanded();
         searchView.clearFocus();
-        searchView.setQueryHint("Search Village");
+        searchView.setQueryHint("Search Village or Country");
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 

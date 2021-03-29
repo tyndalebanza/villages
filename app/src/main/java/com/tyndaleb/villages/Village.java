@@ -51,6 +51,7 @@ public class Village extends Fragment {
     private List<village_dash> myVillages;
 
     private  DelayedProgressDialog progressDialog ;
+    private TextView no_result;
 
     public static Village newInstance(String search_term) {
         Village fragment = new Village();
@@ -69,6 +70,8 @@ public class Village extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_village, container, false);
         //return inflater.inflate(R.layout.fragment_village, container, false);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
+        no_result = (TextView) rootView.findViewById(R.id.zeroResults);
+        no_result.setVisibility(View.INVISIBLE);
         recyclerView.setHasFixedSize(true);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
@@ -173,7 +176,9 @@ public class Village extends Fragment {
                         // Log.d("Response  Number: ", response.toString());
                         try {
                             // JSONArray categoryArray = response.getJSONArray();
-
+                            if(response.length() == 0){
+                                no_result.setVisibility(View.VISIBLE);
+                            }
                             for (int i = 0; i < response.length(); i++) {
                                 //draft_card draftCard = new draft_card();
                                 JSONObject categoryItem = (JSONObject) response.getJSONObject(String.valueOf(i));
@@ -205,7 +210,7 @@ public class Village extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // TODO Auto-generated method stub
-                        Log.d("VOLLEY",error.getMessage());
+                        // Log.d("VOLLEY",error.getMessage());
                         progressDialog.cancel();
 
 
