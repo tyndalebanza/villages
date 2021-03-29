@@ -40,6 +40,8 @@ public class AppConfig {
     public static String URL_DELETE_FOLLOW = "http://52.63.139.107/scripts/delete_follower.php" ;
     public static String URL_SEARCH_COUNTRY_LIST = "http://52.63.139.107/scripts/country_search.php" ;
     public static String URL_VILLAGE_HOME_LIST = "http://52.63.139.107/scripts/fetch_village_home.php" ;
+    public static String URL_QUERY_PROFILE = "http://52.63.139.107/scripts/fetch_profile.php" ;
+    public static String URL_UPLOAD_PROFILE_PHOTO = "http://52.63.139.107/scripts/submit_profile_photo.php" ;
 
     public static String URL_SEARCH_VILLAGE_LIST= "http://52.63.139.107/scripts/search_duplicate_village.php";
 

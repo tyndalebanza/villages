@@ -2,9 +2,9 @@ package com.tyndaleb.villages;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -25,6 +25,7 @@ import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
@@ -43,80 +44,86 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class VillageProfilePhotoActivity extends AppCompatActivity {
+public class UpdateProfileActivity extends AppCompatActivity {
 
-    private ImageView village_profile_photo ;
-    private int GALLERY_IMAGE_REQ_CODE = 102 ;
+    private ImageView imageView ;
+    private int PICK_IMAGE_REQUEST = 1;
+    private Button btnSave ;
+    private ImageView btnPrevious ;
     private Bitmap bitmap_one;
+    private Bitmap adjustedBitmap ;
+    private RequestQueue requestQueue;
+    //private ProgressDialog pDialog;
     private Bitmap orientedBitmap ;
-    private String village_id ;
-    private String village_name ;
-
-    private ProgressDialog pDialog;
-    private TransferObserver observer ;
-
+    private String db_username ;
     private File imgfile ;
+    private SQLiteHandler db;
+    private SessionManager session;
+    private TransferObserver observer ;
+    private String userid;
+    private  DelayedProgressDialog progressDialog ;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_village_profile_photo);
+        setContentView(R.layout.activity_update_profile);
 
-        Button save_image = (Button) findViewById(R.id.btnSave);
-        ImageView backBtn = (ImageView) findViewById(R.id.btnBack);
-        village_profile_photo = (ImageView) findViewById(R.id.village_profile_photo);
+        imageView = (ImageView) findViewById(R.id.profile_photo);
+        btnSave = (Button)  findViewById(R.id.btnSave);
+        btnPrevious = (ImageView) findViewById(R.id.btnBack);
+        progressDialog = new DelayedProgressDialog();
 
-        village_id = getIntent().getStringExtra("EXTRA_VILLAGE_ID");
-        village_name = getIntent().getStringExtra("EXTRA_VILLAGE_NAME");
-
-        pDialog = new ProgressDialog(this);
-        pDialog.setCancelable(false);
-
-        village_profile_photo.setOnClickListener(new View.OnClickListener() {
+        imageView.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
 
-                ImagePicker.Companion.with(VillageProfilePhotoActivity.this)
+                ImagePicker.Companion.with(UpdateProfileActivity.this)
                         // Crop Image(User can choose Aspect Ratio)
-                        .crop(16f, 9f)
+                        .cropSquare()
                         // User can only select image from Gallery
-                         // Image resolution will be less than 1080 x 1920
+                        // Image resolution will be less than 1080 x 1920
                         .start();
-               }
 
-
-
+            }
 
         });
 
-        save_image.setOnClickListener(new View.OnClickListener() {
+        btnSave.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
-                pDialog.setMessage("Saving ....");
-                showDialog();
-
+                progressDialog.show(UpdateProfileActivity.this.getSupportFragmentManager(), "tag");
                 if (bitmap_one != null) {
 
                     saveImage();
                 } else {
-                    hideDialog();
+                    progressDialog.cancel();
                 }
             }
 
-
         });
 
-        backBtn.setOnClickListener(new View.OnClickListener() {
+        btnPrevious.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
-                // Check for empty data in the form
 
-                finish() ;
+            finish();
 
             }
 
         });
+
+        // SqLite database handler
+        db = new SQLiteHandler(UpdateProfileActivity.this.getApplicationContext());
+
+        // session manager
+        session = new SessionManager(UpdateProfileActivity.this.getApplicationContext());
+
+        HashMap<String, String> user = db.getUserDetails();
+
+        userid = user.get("uid");
+        db_username = user.get("fullname");
+        // db_username = db_username.substring(1);
 
     }
 
@@ -128,7 +135,7 @@ public class VillageProfilePhotoActivity extends AppCompatActivity {
             Uri filePath = data.getData();
             try {
                 //Getting the Bitmap from Gallery
-                bitmap_one = MediaStore.Images.Media.getBitmap(VillageProfilePhotoActivity.this.getApplicationContext().getContentResolver(), filePath);
+                bitmap_one = MediaStore.Images.Media.getBitmap(UpdateProfileActivity.this.getApplicationContext().getContentResolver(), filePath);
                 //Log.d("RESULT_OK","RESULT_OK");
 
                 //adjustedBitmap = modifyOrientation(bitmap_one,filePath.getPath() );
@@ -137,7 +144,7 @@ public class VillageProfilePhotoActivity extends AppCompatActivity {
                 orientedBitmap = ExifUtil.rotateBitmap(filePath.getPath(), bitmap_one);
 
                 //Setting the Bitmap to ImageView
-                village_profile_photo.setImageBitmap(orientedBitmap);
+                imageView.setImageBitmap(orientedBitmap);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -151,21 +158,20 @@ public class VillageProfilePhotoActivity extends AppCompatActivity {
     }
 
     public void saveImage(){
-        //pDialog.setMessage("Saving ....");
-        //showDialog();
+        // progressDialog.show(UpdateProfileActivity.this.getSupportFragmentManager(), "tag");
 
-        File dir = VillageProfilePhotoActivity.this.getExternalFilesDir(null);
+        File dir = UpdateProfileActivity.this.getExternalFilesDir(null);
 
         OutputStream fOut = null;
 
-        imgfile = new File(dir.getAbsolutePath(), village_name + "_" + System.currentTimeMillis() + ".png");
+        imgfile = new File(dir.getAbsolutePath(), db_username + "_" + System.currentTimeMillis() + ".png");
 
         // //Log.d("FOUT",dir.getAbsolutePath());
         try {
             fOut = new FileOutputStream(imgfile);
 
 
-            orientedBitmap.compress(Bitmap.CompressFormat.PNG, 50, fOut);
+            orientedBitmap.compress(Bitmap.CompressFormat.PNG, 85, fOut);
             // saving the Bitmap to a file compressed as a JPEG with 85% compression rate
 
 
@@ -184,7 +190,7 @@ public class VillageProfilePhotoActivity extends AppCompatActivity {
         final String date = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
         // Initialize the Amazon Cognito credentials provider
         CognitoCachingCredentialsProvider credentialsProvider = new CognitoCachingCredentialsProvider(
-                VillageProfilePhotoActivity.this.getApplicationContext(),
+                UpdateProfileActivity.this.getApplicationContext(),
                 "ap-southeast-2:2afc3602-07ad-4a46-8a78-434e5371c65a", // Identity pool ID
                 Regions.AP_SOUTHEAST_2 // Region
         );
@@ -194,7 +200,7 @@ public class VillageProfilePhotoActivity extends AppCompatActivity {
         s3.setRegion(Region.getRegion(Regions.AP_SOUTHEAST_2));
 
         TransferUtility transferUtility = TransferUtility.builder()
-                .context(VillageProfilePhotoActivity.this.getApplicationContext())
+                .context(UpdateProfileActivity.this.getApplicationContext())
                 .awsConfiguration(AWSMobileClient.getInstance().getConfiguration())
                 .s3Client(s3)
                 .build();
@@ -203,7 +209,7 @@ public class VillageProfilePhotoActivity extends AppCompatActivity {
 
         observer = transferUtility.upload(
                 "streamboximages" ,     /* The bucket to upload to */
-                "village/" + date +"/"+ imgfile.getName(),    /* The key for the uploaded object */
+                "profileimages/" + date +"/"+ imgfile.getName(),    /* The key for the uploaded object */
                 imgfile        /* The file where the data to upload exists */
         );
 
@@ -216,9 +222,8 @@ public class VillageProfilePhotoActivity extends AppCompatActivity {
                 if (state.COMPLETED.equals(observer.getState())) {
 
 
-                    String S3_image_file = "https://dq8rhf3zp6dxc.cloudfront.net/village/" + date + "/" + imgfile.getName();
-                    // uploadVideo( userid ,S3_image_file );
-                    insertProfileImage(village_id, S3_image_file);
+                    String S3_image_file = "https://dq8rhf3zp6dxc.cloudfront.net/profileimages/" + date + "/" + imgfile.getName();
+                    uploadVideo( userid ,S3_image_file );
 
 
                 }
@@ -241,52 +246,50 @@ public class VillageProfilePhotoActivity extends AppCompatActivity {
 
     }
 
-    private void insertProfileImage(final String village_id,final String image_url ) {
+
+
+    private void uploadVideo( final String userid , final String image_url  ) {
         // Tag used to cancel the request
         String tag_string_req = "req_register";
 
 
 
-        StringRequest strReq = new StringRequest(Request.Method.POST, AppConfig.URL_VILLAGE_PROFILE_IMAGE, new Response.Listener<String>() {
+        StringRequest strReq = new StringRequest(Request.Method.POST, AppConfig.URL_UPLOAD_PROFILE_PHOTO, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
-                // Log.d("TAG", "Register Response: " + response.toString());
-                hideDialog();
+                // //Log.d(TAG, "Register Response: " + response.toString());
+                progressDialog.cancel();
 
                 try {
                     JSONObject jObj = new JSONObject(response);
                     boolean error = jObj.getBoolean("error");
                     if (!error) {
 
-                        finish();
+
+
                     } else {
 
                         // Error occurred in registration. Get the error
                         // message
-                        String errorMsg = jObj.getString("error_msg");
-
-                        AlertDialog.Builder builder = new AlertDialog.Builder(VillageProfilePhotoActivity.this);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(UpdateProfileActivity.this);
                         builder.setTitle("Error Message");
-                        builder.setMessage(errorMsg);
+                        builder.setMessage("Network Error Message. Restart the Application");
                         builder.setPositiveButton("OK", null);
                         //builder.setNegativeButton("Cancel", null);
                         builder.create().show();
-                        hideDialog();
+                        progressDialog.cancel();
 
                     }
                 } catch (JSONException e) {
 
-                    e.printStackTrace();
-
-                    AlertDialog.Builder builder = new AlertDialog.Builder(VillageProfilePhotoActivity.this);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(UpdateProfileActivity.this);
                     builder.setTitle("Error Message");
-                    builder.setMessage("Network Error . Check your Coverage");
+                    builder.setMessage("Network Error Message. Restart the Application");
                     builder.setPositiveButton("OK", null);
                     //builder.setNegativeButton("Cancel", null);
                     builder.create().show();
-                    hideDialog();
-
+                    progressDialog.cancel();
                 }
 
             }
@@ -295,14 +298,14 @@ public class VillageProfilePhotoActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(VillageProfilePhotoActivity.this);
-                builder.setTitle("Show Creation Error Message");
-                builder.setMessage(error.getMessage());
+                AlertDialog.Builder builder = new AlertDialog.Builder(UpdateProfileActivity.this);
+                builder.setTitle("Error Message");
+                builder.setMessage("Network Error Message. Restart the Application");
                 builder.setPositiveButton("OK", null);
                 //builder.setNegativeButton("Cancel", null);
                 builder.create().show();
 
-                hideDialog();
+                progressDialog.cancel();
             }
         }) {
 
@@ -310,9 +313,8 @@ public class VillageProfilePhotoActivity extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 // Posting params to register url
                 Map<String, String> params = new HashMap<String, String>();
-
-                params.put("village_id", village_id);
-                params.put("image", image_url);
+                params.put("user_id", userid);
+                params.put("image_url", image_url);
 
                 return params;
             }
@@ -323,14 +325,6 @@ public class VillageProfilePhotoActivity extends AppCompatActivity {
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
-    private void showDialog() {
-        if (!pDialog.isShowing())
-            pDialog.show();
-    }
 
-    private void hideDialog() {
-        if (pDialog.isShowing())
-            pDialog.dismiss();
-    }
 
 }
