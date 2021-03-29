@@ -115,7 +115,7 @@ public class Village extends Fragment {
         // db_username = user.get("fullname");
         ////Log.d("USERID",userid);
         get_search_list_url = AppConfig.URL_SEARCH_VILLAGE_LIST + "?village=" + search_term + "&page=";
-        Log.d("SEARCHTERM",get_search_list_url);
+       // Log.d("SEARCHTERM",get_search_list_url);
         getData();
         //Calling method to get data
         recyclerView.setOnScrollChangeListener(new RecyclerView.OnScrollChangeListener() {
