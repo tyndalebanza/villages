@@ -95,6 +95,37 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        changeButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getActivity(), ChangePasswordActivity.class);
+                startActivityForResult(intent, 1);
+
+
+
+            }
+        });
+
+        logout.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+                session.setLogin(false);
+                db.deleteUsers();
+
+                Intent intent = new Intent(getActivity().getApplicationContext(), LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                getActivity().finish();
+
+
+
+            }
+
+
+        });
+
         // SqLite database handler
         db = new SQLiteHandler(getActivity().getApplicationContext());
 

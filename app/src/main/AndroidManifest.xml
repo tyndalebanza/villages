@@ -20,7 +20,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Villages"
         android:usesCleartextTraffic="true">
-        <activity android:name=".UpdateProfileActivity"></activity>
+        <activity android:name=".ChangePasswordActivity"></activity>
+        <activity android:name=".UpdateProfileActivity" />
         <activity android:name=".VillageSearchActivity" />
         <activity android:name=".VillageListActivity" />
         <activity android:name=".VillageActivity" />
