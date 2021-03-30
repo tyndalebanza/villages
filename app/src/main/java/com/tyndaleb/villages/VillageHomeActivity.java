@@ -54,7 +54,7 @@ public class VillageHomeActivity extends AppCompatActivity {
     private ImageView cuisine_led ;
     private ImageView farming_led ;
     private ImageView architecture_led;
-    private ImageView dressing_led ;
+    private ImageView traditional_dress_led ;
     private ImageView outdoor_scenery_led ;
     private ImageView art_and_craft_led ;
     private ImageView wildlife_led ;
@@ -77,7 +77,7 @@ public class VillageHomeActivity extends AppCompatActivity {
         ImageView cuisine_pen = (ImageView) findViewById(R.id.cuisine_pen);
         ImageView farming_pen = (ImageView) findViewById(R.id.farming_pen);
         ImageView architecture_pen = (ImageView) findViewById(R.id.architecture_pen);
-        ImageView dressing_pen = (ImageView) findViewById(R.id.dressing_pen);
+        ImageView traditional_dress_pen = (ImageView) findViewById(R.id.traditional_dress_pen);
         ImageView outdoor_scenery_pen = (ImageView) findViewById(R.id.outdoor_scenery_pen);
         ImageView art_and_craft_pen = (ImageView) findViewById(R.id.art_and_craft_pen);
         ImageView wildlife_pen = (ImageView) findViewById(R.id.wildlife_pen);
@@ -91,7 +91,7 @@ public class VillageHomeActivity extends AppCompatActivity {
         cuisine_led = (ImageView) findViewById(R.id.cuisine_led);
         farming_led = (ImageView) findViewById(R.id.farming_led);
         architecture_led = (ImageView) findViewById(R.id.architecture_led);
-        dressing_led = (ImageView) findViewById(R.id.dressing_led);
+        traditional_dress_led = (ImageView) findViewById(R.id.traditional_dress_led);
         outdoor_scenery_led = (ImageView) findViewById(R.id.outdoor_scenery_led);
         art_and_craft_led = (ImageView) findViewById(R.id.art_and_craft_led);
         wildlife_led = (ImageView) findViewById(R.id.wildlife_led);
@@ -237,14 +237,14 @@ public class VillageHomeActivity extends AppCompatActivity {
             }
         });
 
-        dressing_pen.setOnClickListener(new View.OnClickListener() {
+        traditional_dress_pen.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
                 // Check for empty data in the form
                 Intent intent = new Intent(VillageHomeActivity.this,
                         EditListActivity.class);
                 intent.putExtra("EXTRA_VILLAGE_ID", String.valueOf(village_id));
-                intent.putExtra("EXTRA_CATEGORY", "Dressing");
+                intent.putExtra("EXTRA_CATEGORY", "Traditional Dress");
                 startActivity(intent);
                 // finish() ;
 
@@ -258,7 +258,7 @@ public class VillageHomeActivity extends AppCompatActivity {
                 Intent intent = new Intent(VillageHomeActivity.this,
                         EditListActivity.class);
                 intent.putExtra("EXTRA_VILLAGE_ID", String.valueOf(village_id));
-                intent.putExtra("EXTRA_CATEGORY", "Outdoor_Scenery");
+                intent.putExtra("EXTRA_CATEGORY", "Outdoor Scenery");
                 startActivity(intent);
                 // finish() ;
 
@@ -272,7 +272,7 @@ public class VillageHomeActivity extends AppCompatActivity {
                 Intent intent = new Intent(VillageHomeActivity.this,
                         EditListActivity.class);
                 intent.putExtra("EXTRA_VILLAGE_ID", String.valueOf(village_id));
-                intent.putExtra("EXTRA_CATEGORY", "Art_and_Craft");
+                intent.putExtra("EXTRA_CATEGORY", "Art and Craft");
                 startActivity(intent);
                 // finish() ;
 
@@ -457,7 +457,7 @@ public class VillageHomeActivity extends AppCompatActivity {
                                     architecture_led.setImageResource(R.drawable.green_led) ;
                                 };
                                 if(categoryItem.getInt("dressing_led") > 0) {
-                                    dressing_led.setImageResource(R.drawable.green_led) ;
+                                    traditional_dress_led.setImageResource(R.drawable.green_led) ;
                                 };
                                 if(categoryItem.getInt("outdoor_scenery_led") > 0) {
                                     outdoor_scenery_led.setImageResource(R.drawable.green_led) ;

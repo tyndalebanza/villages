@@ -363,11 +363,11 @@
                 app:srcCompat="@drawable/grey_led" />
 
             <TextView
-                android:id="@+id/dressing"
+                android:id="@+id/traitional_dress"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Dressing"
+                android:text="Traditional Dress"
                 android:textSize="@dimen/_18sdp"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_pen"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -382,10 +382,10 @@
                 android:background="@color/black"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
                 app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
-                app:layout_constraintTop_toBottomOf="@+id/dressing" />
+                app:layout_constraintTop_toBottomOf="@+id/traitional_dress" />
 
             <ImageView
-                android:id="@+id/dressing_led"
+                android:id="@+id/traditional_dress_led"
                 android:layout_width="31dp"
                 android:layout_height="23dp"
                 android:layout_marginEnd="4dp"
@@ -615,7 +615,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"/>
 
             <ImageView
-                android:id="@+id/dressing_pen"
+                android:id="@+id/traditional_dress_pen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/edit_pen"
