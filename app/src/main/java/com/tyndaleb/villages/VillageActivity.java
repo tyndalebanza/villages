@@ -65,6 +65,8 @@ public class VillageActivity extends AppCompatActivity {
     private ImageView art_and_craft_led ;
     private ImageView wildlife_led ;
     private ImageView events_led ;
+    private ImageView people_led ;
+    private ImageView marketplace_led ;
 
     private Button follow_button;
 
@@ -94,6 +96,8 @@ public class VillageActivity extends AppCompatActivity {
         TextView art_and_craft = (TextView) findViewById(R.id.art_and_craft);
         TextView wildlife = (TextView) findViewById(R.id.wildlife);
         TextView events = (TextView) findViewById(R.id.events);
+        TextView people = (TextView) findViewById(R.id.people);
+        TextView marketplace = (TextView) findViewById(R.id.marketplace);
 
         history_led = (ImageView) findViewById(R.id.history_led);
         chieftainship_led = (ImageView) findViewById(R.id.chieftainship_led);
@@ -108,6 +112,8 @@ public class VillageActivity extends AppCompatActivity {
         art_and_craft_led = (ImageView) findViewById(R.id.art_and_craft_led);
         wildlife_led = (ImageView) findViewById(R.id.wildlife_led);
         events_led = (ImageView) findViewById(R.id.events_led);
+        people_led = (ImageView) findViewById(R.id.people_led);
+        marketplace_led = (ImageView) findViewById(R.id.marketplace_led);
 
 
         village_id = getIntent().getIntExtra("EXTRA_VILLAGE_ID",0);
@@ -305,6 +311,34 @@ public class VillageActivity extends AppCompatActivity {
             }
         });
 
+        people.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+                // Check for empty data in the form
+                Intent intent = new Intent(VillageActivity.this,
+                        EditListActivity.class);
+                intent.putExtra("EXTRA_VILLAGE_ID", String.valueOf(village_id));
+                intent.putExtra("EXTRA_CATEGORY", "People");
+                startActivity(intent);
+                // finish() ;
+
+            }
+        });
+
+        marketplace.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+                // Check for empty data in the form
+                Intent intent = new Intent(VillageActivity.this,
+                        EditListActivity.class);
+                intent.putExtra("EXTRA_VILLAGE_ID", String.valueOf(village_id));
+                intent.putExtra("EXTRA_CATEGORY", "Marketplace");
+                startActivity(intent);
+                // finish() ;
+
+            }
+        });
+
 
         btnBack.setOnClickListener(new View.OnClickListener() {
 
@@ -491,7 +525,12 @@ public class VillageActivity extends AppCompatActivity {
                                     events_led.setImageResource(R.drawable.green_led) ;
                                 };
 
-
+                                if(categoryItem.getInt("events_led") > 0) {
+                                    marketplace_led.setImageResource(R.drawable.green_led) ;
+                                };
+                                if(categoryItem.getInt("events_led") > 0) {
+                                    people_led.setImageResource(R.drawable.green_led) ;
+                                };
                             }
 
 

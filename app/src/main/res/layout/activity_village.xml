@@ -539,7 +539,70 @@
                 app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
                 app:layout_constraintTop_toBottomOf="@+id/line13"
                 app:srcCompat="@drawable/grey_led" />
+            <TextView
+                android:id="@+id/people"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="People"
+                android:textSize="@dimen/_18sdp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/guideline_center"
+                app:layout_constraintTop_toBottomOf="@+id/line14" />
 
+            <View
+                android:id="@+id/line15"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/black"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
+                app:layout_constraintTop_toBottomOf="@+id/people" />
+
+            <ImageView
+                android:id="@+id/people_led"
+                android:layout_width="31dp"
+                android:layout_height="23dp"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintBottom_toBottomOf="@+id/line15"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_center"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
+                app:layout_constraintTop_toBottomOf="@+id/line14"
+                app:srcCompat="@drawable/grey_led" />
+            <TextView
+                android:id="@+id/marketplace"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Marketplace"
+                android:textSize="@dimen/_18sdp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/guideline_center"
+                app:layout_constraintTop_toBottomOf="@+id/line15" />
+
+            <View
+                android:id="@+id/line16"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/black"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
+                app:layout_constraintTop_toBottomOf="@+id/marketplace" />
+
+            <ImageView
+                android:id="@+id/marketplace_led"
+                android:layout_width="31dp"
+                android:layout_height="23dp"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintBottom_toBottomOf="@+id/line16"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_center"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
+                app:layout_constraintTop_toBottomOf="@+id/line15"
+                app:srcCompat="@drawable/grey_led" />
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline_pen"
                 android:layout_width="wrap_content"
