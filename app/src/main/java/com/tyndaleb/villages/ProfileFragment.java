@@ -83,6 +83,7 @@ public class ProfileFragment extends Fragment {
         Button changeButton = (Button) rootView.findViewById(R.id.btnPassword);
         Button logout = (Button) rootView.findViewById(R.id.btnLogOut);
         username = (TextView) rootView.findViewById(R.id.username);
+        progressDialog = new DelayedProgressDialog();
 
         profileButton.setOnClickListener(new View.OnClickListener() {
 
@@ -149,14 +150,14 @@ public class ProfileFragment extends Fragment {
     public void fetchImage( ) {
         //pDialog.setMessage("Please wait ...");
         //showDialog();
-
+        progressDialog.show(getActivity().getSupportFragmentManager(), "tag");
         JsonObjectRequest jsObjRequest = new JsonObjectRequest
                 (url_image,null, new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject response) {
                         ////Log.d("Response: ", response.toString());
-                        //  progressDialog.cancel();
+                        progressDialog.cancel();
                         try {
                             JSONArray categoryArray = response.getJSONArray("image");
 
@@ -180,7 +181,7 @@ public class ProfileFragment extends Fragment {
                             builder.setPositiveButton("OK", null);
                             //builder.setNegativeButton("Cancel", null);
                             builder.create().show();
-                            //progressDialog.cancel();
+                            progressDialog.cancel();
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -194,7 +195,7 @@ public class ProfileFragment extends Fragment {
                         builder.setPositiveButton("OK", null);
                         //builder.setNegativeButton("Cancel", null);
                         builder.create().show();
-                        // progressDialog.cancel();
+                        progressDialog.cancel();
 
 
                     }

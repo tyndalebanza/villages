@@ -194,7 +194,7 @@ public class LoginActivity extends AppCompatActivity {
                         //builder.setNegativeButton("Cancel", null);
                         builder.create().show();
 
-
+                        hideDialog();
                     }
                 } catch (JSONException e) {
                     // JSON error
@@ -205,7 +205,7 @@ public class LoginActivity extends AppCompatActivity {
                     builder.setPositiveButton("OK", null);
                     //builder.setNegativeButton("Cancel", null);
                     builder.create().show();
-
+                    hideDialog();
 
                 }
 
@@ -220,7 +220,7 @@ public class LoginActivity extends AppCompatActivity {
                 builder.setPositiveButton("OK", null);
                 //builder.setNegativeButton("Cancel", null);
                 builder.create().show();
-
+                hideDialog();
 
             }
         }) {

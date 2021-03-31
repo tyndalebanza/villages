@@ -219,7 +219,7 @@ public class ChatBoxActivity extends AppCompatActivity {
 
     }
     private void updateChat( final int thread_id , final String chat_text , final String user_id ) {
-
+        progressDialog.show(ChatBoxActivity.this.getSupportFragmentManager(), "tag");
         // Tag used to cancel the request
         String tag_string_req = "req_new_item";
 
@@ -228,7 +228,7 @@ public class ChatBoxActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(String response) {
-
+                progressDialog.cancel();
                 try {
                     JSONObject jObj = new JSONObject(response);
                     boolean error = jObj.getBoolean("error");
@@ -256,7 +256,7 @@ public class ChatBoxActivity extends AppCompatActivity {
                     builder.setPositiveButton("OK", null);
                     //builder.setNegativeButton("Cancel", null);
                     builder.create().show();
-
+                    progressDialog.cancel();
                 }
 
             }
@@ -271,7 +271,7 @@ public class ChatBoxActivity extends AppCompatActivity {
                 builder.setPositiveButton("OK", null);
                 //builder.setNegativeButton("Cancel", null);
                 builder.create().show();
-
+                progressDialog.cancel();
                 // hideDialog();
             }
         }) {

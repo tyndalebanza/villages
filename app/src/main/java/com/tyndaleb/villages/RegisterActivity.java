@@ -178,6 +178,7 @@ public class RegisterActivity extends AppCompatActivity {
                         builder.setPositiveButton("OK", null);
                         //builder.setNegativeButton("Cancel", null);
                         builder.create().show();
+                        hideDialog();
 
                     }
                 } catch (JSONException e) {
@@ -190,7 +191,7 @@ public class RegisterActivity extends AppCompatActivity {
                     builder.setPositiveButton("OK", null);
                     //builder.setNegativeButton("Cancel", null);
                     builder.create().show();
-
+                    hideDialog();
                 }
 
             }

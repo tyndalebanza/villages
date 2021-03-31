@@ -74,7 +74,7 @@ public class ForgotEmailActivity extends AppCompatActivity {
         String tag_string_req = "req_password";
 
         pDialog.setMessage("Retrieving Password ...");
-        // showDialog();
+        showDialog();
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
                 AppConfig.URL_REQUEST_PASSWORD, new Response.Listener<String>() {
@@ -82,7 +82,7 @@ public class ForgotEmailActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
               //  Log.d(TAG, "Login Response: " + response.toString());
-                // hideDialog();
+                hideDialog();
 
                 try {
                     JSONObject jObj = new JSONObject(response);
@@ -110,7 +110,7 @@ public class ForgotEmailActivity extends AppCompatActivity {
                         builder.setPositiveButton("OK", null);
                         //builder.setNegativeButton("Cancel", null);
                         builder.show();
-
+                        hideDialog();
 
 
                     }
@@ -125,7 +125,7 @@ public class ForgotEmailActivity extends AppCompatActivity {
                     builder.setPositiveButton("OK", null);
                     //builder.setNegativeButton("Cancel", null);
                     builder.show();
-
+                    hideDialog();
 
                 }
 
@@ -144,7 +144,7 @@ public class ForgotEmailActivity extends AppCompatActivity {
                 builder.show();
 
 
-                // hideDialog();
+                hideDialog();
             }
         }) {
 

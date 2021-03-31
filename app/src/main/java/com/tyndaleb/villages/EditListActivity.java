@@ -176,7 +176,7 @@ public class EditListActivity extends AppCompatActivity implements  MultiViewTyp
     }
 
     private JsonObjectRequest getDataFromServer(int requestCount) {
-        // progressDialog.show(EditListActivity.this.getSupportFragmentManager(), "tag");
+        progressDialog.show(EditListActivity.this.getSupportFragmentManager(), "tag");
         JsonObjectRequest jsObjRequest = new JsonObjectRequest
                 (get_village_thread + String.valueOf(requestCount),null, new Response.Listener<JSONObject>() {
 
@@ -217,7 +217,7 @@ public class EditListActivity extends AppCompatActivity implements  MultiViewTyp
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            //progressDialog.cancel();
+                            progressDialog.cancel();
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -225,7 +225,7 @@ public class EditListActivity extends AppCompatActivity implements  MultiViewTyp
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // TODO Auto-generated method stub
-                        // progressDialog.cancel();
+                        progressDialog.cancel();
 
                     }
                 });

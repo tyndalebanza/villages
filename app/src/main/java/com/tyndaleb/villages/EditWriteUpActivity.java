@@ -118,6 +118,7 @@ public class EditWriteUpActivity extends AppCompatActivity {
                     builder.setPositiveButton("OK", null);
                     //builder.setNegativeButton("Cancel", null);
                     builder.create().show();
+                    hideDialog();
                 }
 
             }

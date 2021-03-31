@@ -147,7 +147,7 @@ public class VillageListActivity extends AppCompatActivity {
     }
 
     private JsonObjectRequest getDataFromServer(int requestCount) {
-        // progressDialog.show(EditListActivity.this.getSupportFragmentManager(), "tag");
+        progressDialog.show(VillageListActivity.this.getSupportFragmentManager(), "tag");
         JsonObjectRequest jsObjRequest = new JsonObjectRequest
                 (get_village_thread + String.valueOf(requestCount),null, new Response.Listener<JSONObject>() {
 
@@ -188,7 +188,7 @@ public class VillageListActivity extends AppCompatActivity {
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            //progressDialog.cancel();
+                            progressDialog.cancel();
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -196,7 +196,7 @@ public class VillageListActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // TODO Auto-generated method stub
-                        // progressDialog.cancel();
+                        progressDialog.cancel();
 
                     }
                 });

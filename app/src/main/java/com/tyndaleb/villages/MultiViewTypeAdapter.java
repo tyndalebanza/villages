@@ -26,6 +26,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import static com.tyndaleb.villages.AppController.TAG;
@@ -42,6 +43,7 @@ public class MultiViewTypeAdapter extends RecyclerView.Adapter<RecyclerView.View
     private SQLiteHandler db;
     private SessionManager session;
     private String user_id ;
+    private  DelayedProgressDialog progressDialog ;
 
     public static class TextTypeViewHolder extends RecyclerView.ViewHolder {
 
@@ -142,6 +144,7 @@ public class MultiViewTypeAdapter extends RecyclerView.Adapter<RecyclerView.View
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int listPosition) {
 
+        progressDialog = new DelayedProgressDialog();
         // SqLite database handler
         db = new SQLiteHandler(mContext.getApplicationContext());
 
@@ -378,6 +381,7 @@ public class MultiViewTypeAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     public  void deletePost( final String village_thread_id   )  {
         // Tag used to cancel the request
+        progressDialog.show(((AppCompatActivity) mContext).getSupportFragmentManager(), "tag");
         String tag_string_req = "req_register";
 
         StringRequest strReq = new StringRequest(Request.Method.POST, AppConfig.URL_DELETE_MY_POST, new Response.Listener<String>() {
@@ -385,7 +389,7 @@ public class MultiViewTypeAdapter extends RecyclerView.Adapter<RecyclerView.View
             @Override
             public void onResponse(String response) {
                 // //Log.d(TAG, "Register Response: " + response.toString());
-                // hideDialog();
+                progressDialog.cancel();
 
                 try {
                     JSONObject jObj = new JSONObject(response);
@@ -418,6 +422,7 @@ public class MultiViewTypeAdapter extends RecyclerView.Adapter<RecyclerView.View
                     builder.setPositiveButton("OK", null);
                     //builder.setNegativeButton("Cancel", null);
                     builder.create().show();
+                    progressDialog.cancel();
                 }
 
             }
@@ -432,6 +437,7 @@ public class MultiViewTypeAdapter extends RecyclerView.Adapter<RecyclerView.View
                 builder.setPositiveButton("OK", null);
                 //builder.setNegativeButton("Cancel", null);
                 builder.create().show();
+                progressDialog.cancel();
 
             }
         }) {

@@ -113,7 +113,7 @@ public class NewVillageActivity extends AppCompatActivity {
                         intent.putExtra("EXTRA_VILLAGE_NAME", village_name.getText().toString());
                         startActivity(intent);
                         finish() ;
-
+                        hideDialog();
                     }
 
 
@@ -128,7 +128,7 @@ public class NewVillageActivity extends AppCompatActivity {
                     builder.setPositiveButton("OK", null);
                     //builder.setNegativeButton("Cancel", null);
                     builder.create().show();
-
+                    hideDialog();
                 }
 
             }
