@@ -81,6 +81,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
                 ImagePicker.Companion.with(UpdateProfileActivity.this)
                         // Crop Image(User can choose Aspect Ratio)
                         .cropSquare()
+                        .compress(512)
                         // User can only select image from Gallery
                         // Image resolution will be less than 1080 x 1920
                         .start();

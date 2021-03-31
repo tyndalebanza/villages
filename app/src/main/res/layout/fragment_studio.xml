@@ -16,7 +16,7 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/edit_icon"
+        android:src="@drawable/edit_icon"
         android:backgroundTint="@color/white"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"

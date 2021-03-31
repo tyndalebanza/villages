@@ -96,6 +96,7 @@ public class EditPhotoActivity extends AppCompatActivity {
                 ImagePicker.Companion.with(EditPhotoActivity.this)
                         // Crop Image(User can choose Aspect Ratio)
                         .crop(16f, 9f)
+                        .compress(512)
                         // User can only select image from Gallery
                         // Image resolution will be less than 1080 x 1920
                         .start();
@@ -162,10 +163,10 @@ public class EditPhotoActivity extends AppCompatActivity {
                 bitmap_one = MediaStore.Images.Media.getBitmap(EditPhotoActivity.this.getApplicationContext().getContentResolver(), filePath);
 
                 // Bitmap bitmap_two = modifyOrientation(bitmap_one,filePath.getPath() );
-                orientedBitmap = ExifUtil.rotateBitmap(filePath.getPath(), bitmap_one);
+                //orientedBitmap = ExifUtil.rotateBitmap(filePath.getPath(), bitmap_one);
 
                 //Setting the Bitmap to ImageView
-                village_line_photo.setImageBitmap(orientedBitmap);
+                village_line_photo.setImageBitmap(bitmap_one);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -193,7 +194,7 @@ public class EditPhotoActivity extends AppCompatActivity {
             fOut = new FileOutputStream(imgfile);
 
 
-            orientedBitmap.compress(Bitmap.CompressFormat.PNG, 85, fOut);
+            bitmap_one.compress(Bitmap.CompressFormat.PNG, 85, fOut);
             // saving the Bitmap to a file compressed as a JPEG with 85% compression rate
 
 

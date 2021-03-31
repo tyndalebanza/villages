@@ -80,6 +80,7 @@ public class VillageProfilePhotoActivity extends AppCompatActivity {
                 ImagePicker.Companion.with(VillageProfilePhotoActivity.this)
                         // Crop Image(User can choose Aspect Ratio)
                         .crop(16f, 9f)
+                        .compress(512)
                         // User can only select image from Gallery
                          // Image resolution will be less than 1080 x 1920
                         .start();
@@ -134,10 +135,10 @@ public class VillageProfilePhotoActivity extends AppCompatActivity {
                 //adjustedBitmap = modifyOrientation(bitmap_one,filePath.getPath() );
                 // adjustedBitmap = getResizedBitmap(bitmap_one, 200);
                 // Bitmap bitmap_two = modifyOrientation(bitmap_one,filePath.getPath() );
-                orientedBitmap = ExifUtil.rotateBitmap(filePath.getPath(), bitmap_one);
+                // orientedBitmap = ExifUtil.rotateBitmap(filePath.getPath(), bitmap_one);
 
                 //Setting the Bitmap to ImageView
-                village_profile_photo.setImageBitmap(orientedBitmap);
+                village_profile_photo.setImageBitmap(bitmap_one);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -165,7 +166,7 @@ public class VillageProfilePhotoActivity extends AppCompatActivity {
             fOut = new FileOutputStream(imgfile);
 
 
-            orientedBitmap.compress(Bitmap.CompressFormat.PNG, 50, fOut);
+            bitmap_one.compress(Bitmap.CompressFormat.PNG, 50, fOut);
             // saving the Bitmap to a file compressed as a JPEG with 85% compression rate
 
 

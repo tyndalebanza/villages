@@ -20,28 +20,28 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Villages"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ChangePasswordActivity"></activity>
-        <activity android:name=".UpdateProfileActivity" />
-        <activity android:name=".VillageSearchActivity" />
-        <activity android:name=".VillageListActivity" />
-        <activity android:name=".VillageActivity" />
-        <activity android:name=".ChatBoxActivity" />
-        <activity android:name=".EditWriteUpActivity" />
-        <activity android:name=".EditPhotoActivity" />
-        <activity android:name=".EditLineActivity" />
-        <activity android:name=".EditListActivity" />
-        <activity android:name=".VillageProfilePhotoActivity" />
-        <activity android:name=".VillageHomeActivity" />
-        <activity android:name=".CountryActivity" />
-        <activity android:name=".ProvinceActivity" />
-        <activity android:name=".DuplicateVillageActivity" />
-        <activity android:name=".NewVillageActivity" />
-        <activity android:name=".SendMessageActivity" />
-        <activity android:name=".ForgotEmailActivity" />
-        <activity android:name=".FrontPageActivity" />
-        <activity android:name=".WelcomeActivity" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".ChangePasswordActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".UpdateProfileActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".VillageSearchActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".VillageListActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".VillageActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".ChatBoxActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".EditWriteUpActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".EditPhotoActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".EditLineActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".EditListActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".VillageProfilePhotoActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".VillageHomeActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".CountryActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".ProvinceActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".DuplicateVillageActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".NewVillageActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".SendMessageActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".ForgotEmailActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".FrontPageActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".WelcomeActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".RegisterActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".LoginActivity" android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait" />
