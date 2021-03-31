@@ -92,7 +92,7 @@
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:layout_marginTop="20dp"
-                android:background="@color/black"
+                android:background="@color/light_grey"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
                 app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
                 app:layout_constraintTop_toBottomOf="@+id/home_image" />
@@ -114,7 +114,7 @@
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:layout_marginTop="10dp"
-                android:background="@color/black"
+                android:background="@color/light_grey"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
                 app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
                 app:layout_constraintTop_toBottomOf="@+id/history" />
@@ -148,7 +148,7 @@
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:layout_marginTop="10dp"
-                android:background="@color/black"
+                android:background="@color/light_grey"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
                 app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
                 app:layout_constraintTop_toBottomOf="@+id/chieftainship" />
@@ -181,7 +181,7 @@
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:layout_marginTop="10dp"
-                android:background="@color/black"
+                android:background="@color/light_grey"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
                 app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
                 app:layout_constraintTop_toBottomOf="@+id/tribe" />
@@ -214,7 +214,7 @@
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:layout_marginTop="10dp"
-                android:background="@color/black"
+                android:background="@color/light_grey"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
                 app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
                 app:layout_constraintTop_toBottomOf="@+id/language" />
@@ -247,7 +247,7 @@
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:layout_marginTop="10dp"
-                android:background="@color/black"
+                android:background="@color/light_grey"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
                 app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
                 app:layout_constraintTop_toBottomOf="@+id/traditions" />
@@ -280,7 +280,7 @@
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:layout_marginTop="10dp"
-                android:background="@color/black"
+                android:background="@color/light_grey"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
                 app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
                 app:layout_constraintTop_toBottomOf="@+id/cuisine" />
@@ -313,7 +313,7 @@
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:layout_marginTop="10dp"
-                android:background="@color/black"
+                android:background="@color/light_grey"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
                 app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
                 app:layout_constraintTop_toBottomOf="@+id/farming" />
@@ -346,7 +346,7 @@
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:layout_marginTop="10dp"
-                android:background="@color/black"
+                android:background="@color/light_grey"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
                 app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
                 app:layout_constraintTop_toBottomOf="@+id/architecture" />
@@ -379,7 +379,7 @@
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:layout_marginTop="10dp"
-                android:background="@color/black"
+                android:background="@color/light_grey"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
                 app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
                 app:layout_constraintTop_toBottomOf="@+id/traitional_dress" />
@@ -412,7 +412,7 @@
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:layout_marginTop="10dp"
-                android:background="@color/black"
+                android:background="@color/light_grey"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
                 app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
                 app:layout_constraintTop_toBottomOf="@+id/outdoor_scenery" />
@@ -445,7 +445,7 @@
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:layout_marginTop="10dp"
-                android:background="@color/black"
+                android:background="@color/light_grey"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
                 app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
                 app:layout_constraintTop_toBottomOf="@+id/art_and_craft" />
@@ -478,7 +478,7 @@
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:layout_marginTop="10dp"
-                android:background="@color/black"
+                android:background="@color/light_grey"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
                 app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
                 app:layout_constraintTop_toBottomOf="@+id/wildlife" />
@@ -511,7 +511,7 @@
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:layout_marginTop="10dp"
-                android:background="@color/black"
+                android:background="@color/light_grey"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
                 app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
                 app:layout_constraintTop_toBottomOf="@+id/events" />
@@ -544,7 +544,7 @@
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:layout_marginTop="10dp"
-                android:background="@color/black"
+                android:background="@color/light_grey"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
                 app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
                 app:layout_constraintTop_toBottomOf="@+id/people" />
@@ -576,7 +576,7 @@
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:layout_marginTop="10dp"
-                android:background="@color/black"
+                android:background="@color/light_grey"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
                 app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
                 app:layout_constraintTop_toBottomOf="@+id/marketplace" />
