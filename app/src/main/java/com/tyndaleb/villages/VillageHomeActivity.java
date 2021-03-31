@@ -437,7 +437,7 @@ public class VillageHomeActivity extends AppCompatActivity {
         // SqLite database handler
 
 
-        url_fetch_village = AppConfig.URL_VILLAGE_HOME + "?village_id=" + village_id  ;
+        url_fetch_village = AppConfig.URL_VILLAGE_EDIT_HOME + "?village_id=" + village_id  ;
 
         url_fetch_led = AppConfig.URL_VILLAGE_LED + "?village_id=" + village_id  ;
 

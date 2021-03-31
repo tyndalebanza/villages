@@ -44,6 +44,7 @@ public class AppConfig {
     public static String URL_UPLOAD_PROFILE_PHOTO = "http://52.63.139.107/scripts/submit_profile_photo.php" ;
     public static String URL_CHANGE_PASSWORD = "http://52.63.139.107/scripts/android_change_pw.php";
     public static String URL_VILLAGE_EDITOR = "http://52.63.139.107/scripts/insert_village_editors.php";
+    public static String URL_VILLAGE_EDIT_HOME = "http://52.63.139.107/scripts/fetch_village_edit_counts.php";
 
     public static String URL_SEARCH_VILLAGE_LIST= "http://52.63.139.107/scripts/search_duplicate_village.php";
 

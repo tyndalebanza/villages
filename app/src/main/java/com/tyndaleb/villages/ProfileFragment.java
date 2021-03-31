@@ -26,6 +26,7 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.Objects;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
@@ -140,7 +141,7 @@ public class ProfileFragment extends Fragment {
 
         url_image = AppConfig.URL_QUERY_PROFILE + "?user_id=" + userid  ;
         requestQueue = Volley.newRequestQueue(getActivity());
-        fetchImage();
+        //fetchImage();
 
         return   rootView;
 
@@ -150,7 +151,10 @@ public class ProfileFragment extends Fragment {
     public void fetchImage( ) {
         //pDialog.setMessage("Please wait ...");
         //showDialog();
+       // progressDialog.show(getActivity().getSupportFragmentManager(), "tag");
+
         progressDialog.show(getActivity().getSupportFragmentManager(), "tag");
+
         JsonObjectRequest jsObjRequest = new JsonObjectRequest
                 (url_image,null, new Response.Listener<JSONObject>() {
 
@@ -212,8 +216,8 @@ public class ProfileFragment extends Fragment {
         imageLoader = CustomVolleyRequest.getInstance(getActivity().getApplicationContext())
                 .getImageLoader();
         imageLoader.get(url, ImageLoader.getImageListener(imageView,
-                0, android.R.drawable
-                        .ic_dialog_alert));
+                0, R.drawable
+                        .loading));
         imageView.setImageUrl(url, imageLoader);
 
     }
