@@ -311,7 +311,7 @@ public class EditPhotoActivity extends AppCompatActivity {
                     e.printStackTrace();
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(EditPhotoActivity.this);
-                    builder.setTitle("Show Creation Error Message");
+                    builder.setTitle("Error Message");
                     builder.setMessage("Network Error . Check your Coverage");
                     builder.setPositiveButton("OK", null);
                     //builder.setNegativeButton("Cancel", null);
@@ -327,7 +327,7 @@ public class EditPhotoActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(EditPhotoActivity.this);
-                builder.setTitle("Show Creation Error Message");
+                builder.setTitle("Error Message");
                 builder.setMessage(error.getMessage());
                 builder.setPositiveButton("OK", null);
                 //builder.setNegativeButton("Cancel", null);

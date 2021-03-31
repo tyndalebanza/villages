@@ -1,5 +1,6 @@
 package com.tyndaleb.villages;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -14,10 +15,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -27,6 +30,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static java.lang.Integer.parseInt;
 
 public class DuplicateVillageActivity extends AppCompatActivity implements duplicateAdapter.EditListener{
 
@@ -184,20 +190,21 @@ public class DuplicateVillageActivity extends AppCompatActivity implements dupli
                             for (int i = 0; i < response.length(); i++) {
                                 //draft_card draftCard = new draft_card();
                                 JSONObject categoryItem = (JSONObject) response.getJSONObject(String.valueOf(i));
+                                if(categoryItem.getString("status").equals("P")) {
+                                    int v_village_id = categoryItem.getInt("village_id");
+                                    String v_village_name = categoryItem.getString("village_name");
+                                    String v_country = categoryItem.getString("country");
+                                    String v_state = categoryItem.getString("state");
+                                    String v_image_url = categoryItem.getString("image");
 
-                                int v_village_id = categoryItem.getInt("village_id");
-                                String v_village_name = categoryItem.getString("village_name");
-                                String v_country = categoryItem.getString("country");
-                                String v_state = categoryItem.getString("state");
-                                String v_image_url = categoryItem.getString("image");
+                                    if (v_image_url.equals("null")) {
+                                        v_image_url = "https://dq8rhf3zp6dxc.cloudfront.net/images/add_image.png";
+                                    }
 
-                                if (v_image_url.equals("null")){
-                                    v_image_url = "https://dq8rhf3zp6dxc.cloudfront.net/images/add_image.png";
+                                    village_dash village_dash = new village_dash(v_village_name, v_country, v_state, v_village_id, v_image_url);
+
+                                    myVillages.add(village_dash);
                                 }
-
-                                village_dash village_dash = new village_dash(v_village_name , v_country ,v_state , v_village_id,v_image_url);
-
-                                myVillages.add(village_dash);
                             }
                             adapter.notifyDataSetChanged();
 
@@ -228,13 +235,96 @@ public class DuplicateVillageActivity extends AppCompatActivity implements dupli
     }
     public void onItemClicked(int village_id){
 
-       Intent intent = new Intent(
-                DuplicateVillageActivity.this,
-                VillageHomeActivity.class);
-        intent.putExtra("EXTRA_VILLAGE_ID", village_id);
-        startActivity(intent);
-        finish() ;
+        updateVillageEditor(String.valueOf(village_id),userid );
 
+    }
+
+    private void updateVillageEditor(final String village_id,final String user_id ) {
+        // Tag used to cancel the request
+        String tag_string_req = "req_register";
+
+        progressDialog.show(this.getSupportFragmentManager(), "tag");
+
+        StringRequest strReq = new StringRequest(Request.Method.POST, AppConfig.URL_VILLAGE_EDITOR, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                // Log.d("TAG", "Register Response: " + response.toString());
+                progressDialog.cancel();
+
+                try {
+
+                    progressDialog.cancel();
+                    JSONObject jObj = new JSONObject(response);
+                    boolean error = jObj.getBoolean("error");
+                    if (!error) {
+                        Intent intent = new Intent(
+                                DuplicateVillageActivity.this,
+                                VillageHomeActivity.class);
+                        intent.putExtra("EXTRA_VILLAGE_ID", Integer.parseInt((village_id)));
+                        startActivity(intent);
+                        finish() ;
+                    } else {
+
+                        // Error occurred in registration. Get the error
+                        // message
+                        String errorMsg = jObj.getString("error_msg");
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(DuplicateVillageActivity.this);
+                        builder.setTitle("Error Message");
+                        builder.setMessage(errorMsg);
+                        builder.setPositiveButton("OK", null);
+                        //builder.setNegativeButton("Cancel", null);
+                        builder.create().show();
+                        progressDialog.cancel();
+
+                    }
+                } catch (JSONException e) {
+
+                    e.printStackTrace();
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(DuplicateVillageActivity.this);
+                    builder.setTitle("Error Message");
+                    builder.setMessage("Network Error . Check your Coverage");
+                    builder.setPositiveButton("OK", null);
+                    //builder.setNegativeButton("Cancel", null);
+                    builder.create().show();
+                    progressDialog.cancel();
+
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(DuplicateVillageActivity.this);
+                builder.setTitle("Error Message");
+                builder.setMessage(error.getMessage());
+                builder.setPositiveButton("OK", null);
+                //builder.setNegativeButton("Cancel", null);
+                builder.create().show();
+
+                progressDialog.cancel();
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting params to register url
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("village_id", village_id);
+                params.put("user_id", user_id);
+
+                return params;
+            }
+
+        };
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
 

@@ -105,12 +105,12 @@ public class LoginActivity extends AppCompatActivity {
                     checkLogin(email, password);
                 } else {
                     // Prompt user to enter credentials
-                    AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this, R.style.MyAlertDialogStyle);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                     builder.setTitle("Login Error Message");
                     builder.setMessage("Please enter the Email address  and Password");
                     builder.setPositiveButton("OK", null);
                     //builder.setNegativeButton("Cancel", null);
-                    builder.show();
+                    builder.create().show();
 
 
                 }
@@ -187,24 +187,24 @@ public class LoginActivity extends AppCompatActivity {
                     } else {
                         // Error in login. Get the error message
                         String errorMsg = jObj.getString("error_msg");
-                        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this, R.style.MyAlertDialogStyle);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                         builder.setTitle("Login Error Message");
                         builder.setMessage(errorMsg);
                         builder.setPositiveButton("OK", null);
                         //builder.setNegativeButton("Cancel", null);
-                        builder.show();
+                        builder.create().show();
 
 
                     }
                 } catch (JSONException e) {
                     // JSON error
 
-                    AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this, R.style.MyAlertDialogStyle);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                     builder.setTitle("Login Error Message");
                     builder.setMessage("Network Error Message. Restart the Application");
                     builder.setPositiveButton("OK", null);
                     //builder.setNegativeButton("Cancel", null);
-                    builder.show();
+                    builder.create().show();
 
 
                 }
@@ -214,12 +214,12 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this, R.style.MyAlertDialogStyle);
+                AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                 builder.setTitle("Login Error Message");
                 builder.setMessage(error.getMessage());
                 builder.setPositiveButton("OK", null);
                 //builder.setNegativeButton("Cancel", null);
-                builder.show();
+                builder.create().show();
 
 
             }

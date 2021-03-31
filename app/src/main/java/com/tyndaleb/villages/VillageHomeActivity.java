@@ -424,8 +424,8 @@ public class VillageHomeActivity extends AppCompatActivity {
         imageLoader = CustomVolleyRequest.getInstance(VillageHomeActivity.this.getApplicationContext())
                 .getImageLoader();
         imageLoader.get(url, ImageLoader.getImageListener(imageView,
-                0, android.R.drawable
-                        .ic_dialog_alert));
+                0, R.drawable.loading
+                        ));
         imageView.setImageUrl(url, imageLoader);
 
     }

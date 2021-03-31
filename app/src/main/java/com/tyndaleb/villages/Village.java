@@ -182,20 +182,22 @@ public class Village extends Fragment {
                             for (int i = 0; i < response.length(); i++) {
                                 //draft_card draftCard = new draft_card();
                                 JSONObject categoryItem = (JSONObject) response.getJSONObject(String.valueOf(i));
+                                if(categoryItem.getString("status").equals("P")) {
+                                    int v_village_id = categoryItem.getInt("village_id");
+                                    String v_village_name = categoryItem.getString("village_name");
+                                    String v_country = categoryItem.getString("country");
+                                    String v_state = categoryItem.getString("state");
+                                    String v_image_url = categoryItem.getString("image");
 
-                                int v_village_id = categoryItem.getInt("village_id");
-                                String v_village_name = categoryItem.getString("village_name");
-                                String v_country = categoryItem.getString("country");
-                                String v_state = categoryItem.getString("state");
-                                String v_image_url = categoryItem.getString("image");
+                                    if (v_image_url.equals("null")) {
+                                        v_image_url = "https://dq8rhf3zp6dxc.cloudfront.net/images/add_image.png";
+                                    }
 
-                                if (v_image_url.equals("null")){
-                                    v_image_url = "https://dq8rhf3zp6dxc.cloudfront.net/images/add_image.png";
+
+                                    village_dash village_dash = new village_dash(v_village_name, v_country, v_state, v_village_id, v_image_url);
+
+                                    myVillages.add(village_dash);
                                 }
-
-                                village_dash village_dash = new village_dash(v_village_name , v_country ,v_state , v_village_id,v_image_url);
-
-                                myVillages.add(village_dash);
                             }
                             adapter.notifyDataSetChanged();
 

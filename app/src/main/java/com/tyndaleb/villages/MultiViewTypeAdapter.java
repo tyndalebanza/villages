@@ -250,7 +250,7 @@ public class MultiViewTypeAdapter extends RecyclerView.Adapter<RecyclerView.View
                                             }
                                         });
 
-                                builder.show();
+                                builder.create().show();
 
 
 

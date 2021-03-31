@@ -110,7 +110,7 @@ public class EditLineActivity extends AppCompatActivity {
                             String errorMsg = jObj.getString("error_msg");
 
                             AlertDialog.Builder builder = new AlertDialog.Builder(EditLineActivity.this);
-                            builder.setTitle("Show Creation Error Message");
+                            builder.setTitle("Error Message");
                             builder.setMessage(errorMsg);
                             builder.setPositiveButton("OK", null);
                             //builder.setNegativeButton("Cancel", null);
@@ -122,7 +122,7 @@ public class EditLineActivity extends AppCompatActivity {
                         e.printStackTrace();
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(EditLineActivity.this);
-                        builder.setTitle("Show Creation Error Message");
+                        builder.setTitle("SError Message");
                         builder.setMessage("Network Error . Check your Coverage");
                         builder.setPositiveButton("OK", null);
                         //builder.setNegativeButton("Cancel", null);
@@ -137,7 +137,7 @@ public class EditLineActivity extends AppCompatActivity {
                 public void onErrorResponse(VolleyError error) {
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(EditLineActivity.this);
-                    builder.setTitle("Show Creation Error Message");
+                    builder.setTitle("Error Message");
                     builder.setMessage(error.getMessage());
                     builder.setPositiveButton("OK", null);
                     //builder.setNegativeButton("Cancel", null);

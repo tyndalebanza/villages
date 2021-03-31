@@ -106,12 +106,12 @@ public class RegisterActivity extends AppCompatActivity {
 
                 } else {
 
-                    AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this, R.style.MyAlertDialogStyle);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
                     builder.setTitle("Registration Error Message");
                     builder.setMessage("Please enter e-mail address , username and password");
                     builder.setPositiveButton("OK", null);
                     //builder.setNegativeButton("Cancel", null);
-                    builder.show();
+                    builder.create().show();
 
                 }
             }
@@ -172,24 +172,24 @@ public class RegisterActivity extends AppCompatActivity {
                         // message
                         String errorMsg = jObj.getString("error_msg");
 
-                        AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this, R.style.MyAlertDialogStyle);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
                         builder.setTitle("Registration Error Message");
                         builder.setMessage(errorMsg);
                         builder.setPositiveButton("OK", null);
                         //builder.setNegativeButton("Cancel", null);
-                        builder.show();
+                        builder.create().show();
 
                     }
                 } catch (JSONException e) {
 
                     e.printStackTrace();
 
-                    AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this, R.style.MyAlertDialogStyle);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
                     builder.setTitle("Registration Error Message");
                     builder.setMessage("Network Error . Check your Coverage");
                     builder.setPositiveButton("OK", null);
                     //builder.setNegativeButton("Cancel", null);
-                    builder.show();
+                    builder.create().show();
 
                 }
 
@@ -199,12 +199,12 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this, R.style.MyAlertDialogStyle);
+                AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
                 builder.setTitle("Registration Error Message");
                 builder.setMessage(error.getMessage());
                 builder.setPositiveButton("OK", null);
                 //builder.setNegativeButton("Cancel", null);
-                builder.show();
+                builder.create().show();
 
                 hideDialog();
             }

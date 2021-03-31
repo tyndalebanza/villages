@@ -89,21 +89,21 @@ public class ChangePasswordActivity extends AppCompatActivity {
                         //resetPassword(final String uid, final String password , final String newpassword)
                     }else {
                         // login user
-                        AlertDialog.Builder builder = new AlertDialog.Builder(ChangePasswordActivity.this, R.style.MyAlertDialogStyle);
-                        builder.setTitle("Login Error Message");
+                        AlertDialog.Builder builder = new AlertDialog.Builder(ChangePasswordActivity.this);
+                        builder.setTitle("Error Message");
                         builder.setMessage("The new passwords are not the same , please re-enter");
                         builder.setPositiveButton("OK", null);
                         //builder.setNegativeButton("Cancel", null);
-                        builder.show();
+                        builder.create().show();
                     }
                 } else {
                     // Prompt user to enter credentials
-                    AlertDialog.Builder builder = new AlertDialog.Builder(ChangePasswordActivity.this, R.style.MyAlertDialogStyle);
-                    builder.setTitle("Login Error Message");
+                    AlertDialog.Builder builder = new AlertDialog.Builder(ChangePasswordActivity.this);
+                    builder.setTitle("Error Message");
                     builder.setMessage("Please enter the missing Password");
                     builder.setPositiveButton("OK", null);
                     //builder.setNegativeButton("Cancel", null);
-                    builder.show();
+                    builder.create().show();
 
 
                 }
@@ -178,7 +178,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                         // Error in login. Get the error message
                         String errorMsg = jObj.getString("error_msg");
                         AlertDialog.Builder builder = new AlertDialog.Builder(ChangePasswordActivity.this);
-                        builder.setTitle("Login Error Message");
+                        builder.setTitle("Error Message");
                         builder.setMessage(errorMsg);
                         builder.setPositiveButton("OK", null);
                         //builder.setNegativeButton("Cancel", null);
@@ -190,7 +190,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                     // JSON error
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(ChangePasswordActivity.this);
-                    builder.setTitle("Login Error Message");
+                    builder.setTitle("Error Message");
                     builder.setMessage( e.getMessage());
                     builder.setPositiveButton("OK", null);
                     //builder.setNegativeButton("Cancel", null);
@@ -205,7 +205,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(ChangePasswordActivity.this);
-                builder.setTitle("Login Error Message");
+                builder.setTitle("Error Message");
                 builder.setMessage(error.getMessage());
                 builder.setPositiveButton("OK", null);
                 //builder.setNegativeButton("Cancel", null);
