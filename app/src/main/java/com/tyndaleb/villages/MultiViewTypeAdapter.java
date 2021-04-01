@@ -162,6 +162,17 @@ public class MultiViewTypeAdapter extends RecyclerView.Adapter<RecyclerView.View
                     ((TextTypeViewHolder) holder).txtEdit.setText(object.write_up);
                     String str = "Submitted by " + object.fullname ;
                     ((TextTypeViewHolder) holder).username.setText(str);
+                    ((TextTypeViewHolder) holder).username.setOnClickListener(new View.OnClickListener(){
+                        @Override
+                        public void onClick(View v) {
+                            /// button click event
+
+                            Intent intent = new Intent(mContext, BioLinkActivity.class);
+                            intent.putExtra("EXTRA_USER_ID", String.valueOf(object.user_id));
+                            mContext.startActivity(intent);
+
+                        }
+                    });
 
                     ((TextTypeViewHolder) holder).comments.setOnClickListener(new View.OnClickListener(){
                         @Override
@@ -277,6 +288,17 @@ public class MultiViewTypeAdapter extends RecyclerView.Adapter<RecyclerView.View
                     ((ImageTypeViewHolder) holder).image.setImageUrl(object.image, imageLoader);
                     String str01 = "Submitted by " + object.fullname ;
                     ((ImageTypeViewHolder) holder).username.setText(str01);
+                    ((ImageTypeViewHolder) holder).username.setOnClickListener(new View.OnClickListener(){
+                        @Override
+                        public void onClick(View v) {
+                            /// button click event
+
+                            Intent intent = new Intent(mContext, BioLinkActivity.class);
+                            intent.putExtra("EXTRA_USER_ID", String.valueOf(object.user_id));
+                            mContext.startActivity(intent);
+
+                        }
+                    });
                     ((ImageTypeViewHolder) holder).likes.setOnClickListener(new View.OnClickListener(){
                         @Override
                         public void onClick(View v) {

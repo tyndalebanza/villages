@@ -20,7 +20,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Villages"
         android:usesCleartextTraffic="true">
-        <activity android:name=".BioActivity"></activity>
+        <activity android:name=".BioLinkActivity"></activity>
+        <activity android:name=".BioActivity" />
         <activity
             android:name=".ChangePasswordActivity"
             android:screenOrientation="portrait" />
