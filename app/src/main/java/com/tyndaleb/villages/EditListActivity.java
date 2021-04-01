@@ -89,7 +89,7 @@ public class EditListActivity extends AppCompatActivity implements  MultiViewTyp
             public void onClick(View view) {
                 // Check for empty data in the form
                 Intent intent = new Intent(EditListActivity.this,
-                        EditLineActivity.class);
+                        UnityEditActivity.class);
                 intent.putExtra("EXTRA_VILLAGE_ID", village_id);
                 intent.putExtra("EXTRA_CATEGORY", category);
                 startActivity(intent);
