@@ -3,12 +3,15 @@ package com.tyndaleb.villages;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.ImageDecoder;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.Editable;
@@ -54,6 +57,11 @@ public class UnityEditActivity extends AppCompatActivity {
     private TransferObserver observer ;
     private String S3_image_file ;
     private ImageView btnSave ;
+    private String village_id ;
+    private  String category ;
+    private String user_id ;
+    private SQLiteHandler db;
+    private SessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +71,17 @@ public class UnityEditActivity extends AppCompatActivity {
         ImageView btnBack = findViewById(R.id.btnBack);
         editor =  findViewById(R.id.editor);
         setUpEditor();
+        village_id = getIntent().getStringExtra("EXTRA_VILLAGE_ID");
+        category = getIntent().getStringExtra("EXTRA_CATEGORY");
+
+        db = new SQLiteHandler(UnityEditActivity.this.getApplicationContext());
+
+        // session manager
+        session = new SessionManager(UnityEditActivity.this.getApplicationContext());
+
+        HashMap<String, String> user = db.getUserDetails();
+
+        user_id = user.get("uid");
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -229,7 +248,7 @@ public class UnityEditActivity extends AppCompatActivity {
 
                 OutputStream fOut = null;
 
-                imgfile = new File(dir.getAbsolutePath(), "db_username" + "_" + System.currentTimeMillis() + ".png");
+                imgfile = new File(dir.getAbsolutePath(), village_id + "_" + System.currentTimeMillis() + ".png");
 
                 // //Log.d("FOUT",dir.getAbsolutePath());
                 try {
@@ -355,7 +374,12 @@ public class UnityEditActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Log.d("HTML_TEXT",editor.getContentAsSerialized());
+                if (editor.getContentAsSerialized().isEmpty()){
+
+                }else {
+                    insertText(user_id, editor.getContentAsSerialized(), "0", village_id, category, "empty", "empty");
+                }
+                // Log.d("HTML_TEXT",editor.getContentAsSerialized());
                 /*
                 Retrieve the content as serialized, you could also say getContentAsHTML();
                 */
@@ -392,28 +416,32 @@ public class UnityEditActivity extends AppCompatActivity {
         return String.format(Locale.getDefault(), "#%02X%02X%02X", r, g, b);
     }
 
-    public static void setGhost(Button button) {
-        int radius = 4;
-        GradientDrawable background = new GradientDrawable();
-        background.setShape(GradientDrawable.RECTANGLE);
-        background.setStroke(4, Color.WHITE);
-        background.setCornerRadius(radius);
-        button.setBackgroundDrawable(background);
-    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == editor.PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.getData() != null) {
             Uri uri = data.getData();
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+
+                Bitmap bitmap = null;
+                ContentResolver contentResolver = getContentResolver();
+                try {
+                    if(Build.VERSION.SDK_INT < 28) {
+                        bitmap = MediaStore.Images.Media.getBitmap(contentResolver, uri);
+                    } else {
+                        ImageDecoder.Source source = ImageDecoder.createSource(contentResolver, uri);
+                        bitmap = ImageDecoder.decodeBitmap(source);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                // Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
                 // Log.d(TAG, String.valueOf(bitmap));
-                editor.insertImage(bitmap);
-            } catch (IOException e) {
-                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                e.printStackTrace();
-            }
+                orientedBitmap = ExifUtil.rotateBitmap(uri.getPath(), bitmap);
+                editor.insertImage(orientedBitmap);
+
         } else if (resultCode == Activity.RESULT_CANCELED) {
             //Write your code if there's no result
             Toast.makeText(getApplicationContext(), "Cancelled", Toast.LENGTH_SHORT).show();

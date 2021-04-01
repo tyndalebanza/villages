@@ -31,7 +31,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:text="Tap below to post something"
+        android:text="Tap below left to post something"
         android:gravity="center"
         app:layout_constraintEnd_toStartOf="@+id/btnTick"
         app:layout_constraintStart_toEndOf="@+id/btnBack"
