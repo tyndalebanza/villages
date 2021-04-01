@@ -44,7 +44,7 @@
     android:id="@+id/btnProfile"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
-    android:layout_marginTop="30dp"
+    android:layout_marginTop="20dp"
     android:text="profile"
     android:textColor="@color/white"
     android:textSize="25dp"
@@ -58,7 +58,7 @@
         android:id="@+id/btnPassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:text="change password"
         android:textSize="25dp"
         android:textAllCaps="false"
@@ -71,7 +71,7 @@
         android:id="@+id/btnLogOut"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:text="log out"
         android:textColor="@color/white"
         android:textSize="25dp"
@@ -80,6 +80,20 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline_right_01"
         app:layout_constraintStart_toStartOf="@+id/guideline_left_01"
         app:layout_constraintTop_toBottomOf="@+id/btnPassword" />
+
+    <TextView
+        android:id="@+id/bio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="my bio"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:textSize="@dimen/_18sdp"
+        android:textColor="@color/light_blue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnLogOut" />
+
 
     <TextView
         android:id="@+id/terms"

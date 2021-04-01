@@ -84,6 +84,7 @@ public class ProfileFragment extends Fragment {
         Button changeButton = (Button) rootView.findViewById(R.id.btnPassword);
         Button logout = (Button) rootView.findViewById(R.id.btnLogOut);
         username = (TextView) rootView.findViewById(R.id.username);
+        TextView updateBio = (TextView) rootView.findViewById(R.id.bio);
         progressDialog = new DelayedProgressDialog();
 
         profileButton.setOnClickListener(new View.OnClickListener() {
@@ -104,6 +105,19 @@ public class ProfileFragment extends Fragment {
 
                 Intent intent = new Intent(getActivity(), ChangePasswordActivity.class);
                 startActivityForResult(intent, 1);
+
+
+
+            }
+        });
+
+        updateBio.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getActivity(), BioActivity.class);
+                startActivity(intent);
 
 
 
