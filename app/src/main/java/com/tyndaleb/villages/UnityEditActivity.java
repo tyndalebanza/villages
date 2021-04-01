@@ -1,8 +1,10 @@
 package com.tyndaleb.villages;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -32,9 +34,16 @@ import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.github.irshulx.Editor;
 import com.github.irshulx.EditorListener;
 import com.github.irshulx.models.EditorTextStyle;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -63,6 +72,8 @@ public class UnityEditActivity extends AppCompatActivity {
     private SQLiteHandler db;
     private SessionManager session;
 
+    private ProgressDialog pDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +84,9 @@ public class UnityEditActivity extends AppCompatActivity {
         setUpEditor();
         village_id = getIntent().getStringExtra("EXTRA_VILLAGE_ID");
         category = getIntent().getStringExtra("EXTRA_CATEGORY");
+
+        pDialog = new ProgressDialog(this);
+        pDialog.setCancelable(false);
 
         db = new SQLiteHandler(UnityEditActivity.this.getApplicationContext());
 
@@ -466,6 +480,104 @@ public class UnityEditActivity extends AppCompatActivity {
         typefaceMap.put(Typeface.BOLD_ITALIC, "fonts/Lato-BoldItalic.ttf");
         return typefaceMap;
     }
+
+    private void insertText(final String user_id, final String text_writeup, final String input_type,final String village_id,final String category,final String image_url ,String caption ) {
+        // Tag used to cancel the request
+        String tag_string_req = "req_register";
+
+        pDialog.setMessage("Saving ....");
+        showDialog();
+
+        StringRequest strReq = new StringRequest(Request.Method.POST, AppConfig.URL_VILLAGE_THREAD, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                // Log.d("TAG", "Register Response: " + response.toString());
+                hideDialog();
+
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    boolean error = jObj.getBoolean("error");
+                    if (!error) {
+
+                        finish();
+                    } else {
+
+                        // Error occurred in registration. Get the error
+                        // message
+                        String errorMsg = jObj.getString("error_msg");
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(UnityEditActivity.this);
+                        builder.setTitle("Error Message");
+                        builder.setMessage(errorMsg);
+                        builder.setPositiveButton("OK", null);
+                        //builder.setNegativeButton("Cancel", null);
+                        builder.create().show();
+
+                    }
+                } catch (JSONException e) {
+
+                    e.printStackTrace();
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(UnityEditActivity.this);
+                    builder.setTitle("SError Message");
+                    builder.setMessage("Network Error . Check your Coverage");
+                    builder.setPositiveButton("OK", null);
+                    //builder.setNegativeButton("Cancel", null);
+                    builder.create().show();
+
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(UnityEditActivity.this);
+                builder.setTitle("Error Message");
+                builder.setMessage(error.getMessage());
+                builder.setPositiveButton("OK", null);
+                //builder.setNegativeButton("Cancel", null);
+                builder.create().show();
+
+                hideDialog();
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting params to register url
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("user_id", user_id);
+                params.put("village_id", village_id);
+                params.put("post_type", input_type);
+                params.put("image", image_url);
+                params.put("write_up", text_writeup);
+                params.put("category", category);
+                params.put("caption", caption);
+
+
+                return params;
+            }
+
+        };
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+    }
+
+    private void showDialog() {
+        if (!pDialog.isShowing())
+            pDialog.show();
+    }
+
+    private void hideDialog() {
+        if (pDialog.isShowing())
+            pDialog.dismiss();
+    }
+
+
 
 
 }
