@@ -26,18 +26,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/close_icon" />
 
-    <TextView
-        android:id="@+id/tap"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="Tap below left to post something"
-        android:gravity="center"
-        app:layout_constraintEnd_toStartOf="@+id/btnTick"
-        app:layout_constraintStart_toEndOf="@+id/btnBack"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <RelativeLayout
+     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="?attr/actionBarSize"

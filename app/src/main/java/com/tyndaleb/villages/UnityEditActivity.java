@@ -82,6 +82,7 @@ public class UnityEditActivity extends AppCompatActivity {
         ImageView btnBack = findViewById(R.id.btnBack);
         editor =  findViewById(R.id.editor);
         setUpEditor();
+        editor.render("<p>Insert text and images here.....</p>");
         village_id = getIntent().getStringExtra("EXTRA_VILLAGE_ID");
         category = getIntent().getStringExtra("EXTRA_CATEGORY");
 

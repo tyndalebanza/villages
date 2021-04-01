@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:id="@+id/delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="15dp"
+        android:textColor="@color/light_blue"
+        android:text="Delete"
+        app:layout_constraintBottom_toBottomOf="@+id/edit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:textColor="@color/light_blue"
+        android:text="Edit"
+        app:layout_constraintEnd_toStartOf="@+id/delete"
+        app:layout_constraintTop_toTopOf="parent" />
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:scrollbarStyle="insideOverlay"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/edit">
+    <com.github.irshulx.Editor
+        android:layout_width="match_parent"
+        android:id="@+id/renderer"
+        app:render_type="Renderer"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+        />
+    </ScrollView>
+
+    <ImageView
+        android:id="@+id/comments"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="15dp"
+        android:src="@drawable/comments_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView" />
+
+    <TextView
+        android:id="@+id/no_of_comments"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:text="0"
+        app:layout_constraintBottom_toBottomOf="@+id/comments"
+        app:layout_constraintStart_toEndOf="@+id/comments"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView" />
+
+    <ImageView
+        android:id="@+id/likes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/comments"
+        app:layout_constraintStart_toEndOf="@+id/no_of_comments"
+        app:layout_constraintTop_toTopOf="@+id/comments"
+        android:src="@drawable/thumbs_up" />
+
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:textColor="@color/light_blue"
+        android:textSize="15dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView" />
+
+    <TextView
+        android:id="@+id/no_of_likes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="0"
+        app:layout_constraintBottom_toBottomOf="@+id/likes"
+        app:layout_constraintStart_toEndOf="@+id/likes"
+        app:layout_constraintTop_toTopOf="@+id/likes" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
