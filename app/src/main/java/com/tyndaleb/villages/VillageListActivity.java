@@ -54,8 +54,6 @@ public class VillageListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_village_list);
 
         ImageView backBtn = (ImageView) findViewById(R.id.btnBack);
-        ImageView edit_image = (ImageView)findViewById(R.id.edit_image);
-        ImageView edit_text = (ImageView)findViewById(R.id.edit_text);
         TextView banner = (TextView) findViewById(R.id.category_name);
 
         village_id = getIntent().getStringExtra("EXTRA_VILLAGE_ID");

@@ -3,6 +3,7 @@ package com.tyndaleb.villages;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.StringRequest;
+import com.github.irshulx.Editor;
+import com.github.irshulx.models.EditorContent;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -50,6 +53,7 @@ public class DualViewTypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         public TextView no_of_comments ;
         public ImageView likes ;
         public TextView no_of_likes ;
+        public Editor renderer ;
 
 
         public TextTypeViewHolder(View itemView) {
@@ -57,12 +61,13 @@ public class DualViewTypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
             this.delete = (TextView) itemView.findViewById(R.id.delete);
             this.edit = (TextView) itemView.findViewById(R.id.edit);
-            this.txtEdit = (TextView) itemView.findViewById(R.id.text_writeup);
+            // this.txtEdit = (TextView) itemView.findViewById(R.id.text_writeup);
             this.username = (TextView) itemView.findViewById(R.id.username);
             this.comments = (ImageView) itemView.findViewById(R.id.comments);
             this.no_of_comments = (TextView) itemView.findViewById(R.id.no_of_comments);
             this.no_of_likes = (TextView) itemView.findViewById(R.id.no_of_likes);
             this.likes = (ImageView)  itemView.findViewById(R.id.likes);
+            this.renderer= (Editor)itemView.findViewById(R.id.renderer);
         }
 
     }
@@ -153,7 +158,17 @@ public class DualViewTypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         if (object != null) {
             switch (object.post_type) {
                 case village_item.TEXT_TYPE:
-                    ((TextTypeViewHolder) holder).txtEdit.setText(object.write_up);
+                    Map<Integer, String> headingTypeface = getHeadingTypeface();
+                    Map<Integer, String> contentTypeface = getContentface();
+                    ((TextTypeViewHolder) holder).renderer.setHeadingTypeface(headingTypeface);
+                    ((TextTypeViewHolder) holder).renderer.setContentTypeface(contentTypeface);
+                    ((TextTypeViewHolder) holder).renderer.setDividerLayout(R.layout.tmpl_divider_layout);
+                    ((TextTypeViewHolder) holder).renderer.setEditorImageLayout(R.layout.tmpl_image_view);
+                    ((TextTypeViewHolder) holder).renderer.setListItemLayout(R.layout.tmpl_list_item);
+                    String content= object.write_up;
+                    EditorContent Deserialized= ((TextTypeViewHolder) holder).renderer.getContentDeserialized(content);
+                    ((TextTypeViewHolder) holder).renderer.render(Deserialized);
+                    // ((TextTypeViewHolder) holder).txtEdit.setText(object.write_up);
                     String str = "Submitted by " + object.fullname ;
                     ((TextTypeViewHolder) holder).username.setText(str);
                     ((TextTypeViewHolder) holder).username.setOnClickListener(new View.OnClickListener(){
@@ -364,6 +379,23 @@ public class DualViewTypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
+    public Map<Integer,String> getHeadingTypeface() {
+        Map<Integer, String> typefaceMap = new HashMap<>();
+        typefaceMap.put(Typeface.NORMAL, "fonts/GreycliffCF-Bold.ttf");
+        typefaceMap.put(Typeface.BOLD, "fonts/GreycliffCF-Heavy.ttf");
+        typefaceMap.put(Typeface.ITALIC, "fonts/GreycliffCF-Heavy.ttf");
+        typefaceMap.put(Typeface.BOLD_ITALIC, "fonts/GreycliffCF-Bold.ttf");
+        return typefaceMap;
+    }
+
+    public Map<Integer,String> getContentface() {
+        Map<Integer, String> typefaceMap = new HashMap<>();
+        typefaceMap.put(Typeface.NORMAL,"fonts/Lato-Medium.ttf");
+        typefaceMap.put(Typeface.BOLD,"fonts/Lato-Bold.ttf");
+        typefaceMap.put(Typeface.ITALIC,"fonts/Lato-MediumItalic.ttf");
+        typefaceMap.put(Typeface.BOLD_ITALIC,"fonts/Lato-BoldItalic.ttf");
+        return typefaceMap;
+    }
 
 
 }

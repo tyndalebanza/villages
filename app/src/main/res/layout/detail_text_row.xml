@@ -4,18 +4,28 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:id="@+id/text_writeup"
-        android:layout_width="0dp"
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:scrollbarStyle="insideOverlay"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="10dp"
-        android:text="TextView"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+        <com.github.irshulx.Editor
+            android:layout_width="match_parent"
+            android:id="@+id/renderer"
+            app:render_type="Renderer"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+
+            />
+    </ScrollView>
+
 
     <ImageView
         android:id="@+id/comments"
@@ -27,7 +37,7 @@
         android:src="@drawable/comments_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_writeup" />
+        app:layout_constraintTop_toBottomOf="@+id/scrollView" />
 
     <TextView
         android:id="@+id/no_of_comments"
@@ -38,7 +48,7 @@
         android:text="0"
         app:layout_constraintBottom_toBottomOf="@+id/comments"
         app:layout_constraintStart_toEndOf="@+id/comments"
-        app:layout_constraintTop_toBottomOf="@+id/text_writeup" />
+        app:layout_constraintTop_toBottomOf="@+id/scrollView" />
 
     <ImageView
         android:id="@+id/likes"
@@ -60,7 +70,7 @@
         android:textSize="15dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_writeup" />
+        app:layout_constraintTop_toBottomOf="@+id/scrollView" />
 
     <TextView
         android:id="@+id/no_of_likes"

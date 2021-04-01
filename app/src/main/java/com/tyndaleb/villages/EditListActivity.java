@@ -55,7 +55,7 @@ public class EditListActivity extends AppCompatActivity implements  MultiViewTyp
         setContentView(R.layout.activity_edit_list);
 
         ImageView backBtn = (ImageView) findViewById(R.id.btnBack);
-        ImageView edit_image = (ImageView)findViewById(R.id.edit_image);
+        //ImageView edit_image = (ImageView)findViewById(R.id.edit_image);
         ImageView edit_text = (ImageView)findViewById(R.id.edit_text);
         TextView banner = (TextView) findViewById(R.id.category_name);
 
@@ -98,19 +98,7 @@ public class EditListActivity extends AppCompatActivity implements  MultiViewTyp
             }
         });
 
-        edit_image.setOnClickListener(new View.OnClickListener() {
 
-            public void onClick(View view) {
-                // Check for empty data in the form
-                Intent intent = new Intent(EditListActivity.this,
-                        EditPhotoActivity.class);
-                intent.putExtra("EXTRA_VILLAGE_ID", village_id);
-                intent.putExtra("EXTRA_CATEGORY", category);
-                startActivity(intent);
-                // finish() ;
-
-            }
-        });
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
