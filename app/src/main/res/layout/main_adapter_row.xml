@@ -48,6 +48,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="Village Name"
+        android:textStyle="bold"
         android:textSize="@dimen/_20sdp"
         app:layout_constraintEnd_toStartOf="@+id/guideline_mid"
         app:layout_constraintStart_toStartOf="@+id/guideline_end"

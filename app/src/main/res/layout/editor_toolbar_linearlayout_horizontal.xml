@@ -7,42 +7,33 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
-
-    <Button
+    <ImageButton
         android:id="@+id/action_h1"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:width="40dp"
-        android:height="40dp"
         android:background="@android:color/transparent"
-        android:text="H1"
-        android:textColor="#444444"
-        android:textSize="14sp"
-        android:textStyle="bold" />
+        android:maxHeight="20dp"
+        android:maxWidth="20dp"
+        android:src="@drawable/h1" />
 
-    <Button
+    <ImageButton
         android:id="@+id/action_h2"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:width="40dp"
-        android:height="40dp"
         android:background="@android:color/transparent"
-        android:text="H2"
-        android:textColor="#444444"
-        android:textSize="16sp"
-        android:textStyle="bold" />
+        android:maxHeight="20dp"
+        android:maxWidth="20dp"
+        android:src="@drawable/h2" />
 
-    <Button
+    <ImageButton
         android:id="@+id/action_h3"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:width="40dp"
-        android:height="40dp"
         android:background="@android:color/transparent"
-        android:text="H3"
-        android:textColor="#444444"
-        android:textSize="16sp"
-        android:textStyle="bold" />
+        android:maxHeight="20dp"
+        android:maxWidth="20dp"
+        android:src="@drawable/h3" />
+
 
     <ImageButton
         android:id="@+id/action_bold"

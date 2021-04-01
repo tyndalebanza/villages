@@ -20,6 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Search Results"
+        android:textStyle="bold"
         android:textSize="25dp"
         android:layout_toRightOf="@+id/btnBack"
         android:layout_alignParentTop="true"

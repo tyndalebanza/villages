@@ -59,6 +59,7 @@ public class HomeFragment extends Fragment {
 
     private  DelayedProgressDialog progressDialog ;
     private TextView villagedrum;
+    private TextView text01;
     private  ImageView imgHome ;
 
 
@@ -80,8 +81,9 @@ public class HomeFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
-        imgHome = (ImageView) rootView.findViewById(R.id.home);
+        // imgHome = (ImageView) rootView.findViewById(R.id.home);
         villagedrum = (TextView) rootView.findViewById(R.id.banner01);
+        text01 = (TextView) rootView.findViewById(R.id.text01);
 
         Typeface custom_font = Typeface.createFromAsset(getActivity().getAssets(),  "fonts/Montserrat-Bold.otf");
         villagedrum.setTypeface(custom_font);
@@ -191,7 +193,7 @@ public class HomeFragment extends Fragment {
 
                             if(categoryArray.length() > 0){
 
-                                imgHome.setVisibility(View.INVISIBLE);
+                                text01.setVisibility(View.INVISIBLE);
                             }
 
                             for (int i = 0; i < categoryArray.length(); i++) {

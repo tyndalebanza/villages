@@ -68,7 +68,7 @@ public class VillageActivity extends AppCompatActivity {
     private ImageView people_led ;
     private ImageView marketplace_led ;
 
-    private Button follow_button;
+    private TextView follow_button;
 
     private int follow_count ;
 
@@ -81,7 +81,7 @@ public class VillageActivity extends AppCompatActivity {
         txt_province_country_name = (TextView) findViewById(R.id.StateCountry);
         village_profile_photo = (NetworkImageView) findViewById(R.id.home_image);
         ImageView btnBack = (ImageView) findViewById(R.id.btnBack);
-        follow_button = (Button) findViewById(R.id.btnFollow);
+        follow_button = (TextView) findViewById(R.id.btnFollow);
 
         TextView history = (TextView) findViewById(R.id.history);
         TextView chieftainship = (TextView) findViewById(R.id.chieftainship);

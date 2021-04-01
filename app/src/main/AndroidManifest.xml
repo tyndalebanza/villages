@@ -20,10 +20,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Villages"
         android:usesCleartextTraffic="true">
-        <activity android:name=".TextEditActivity"></activity>
-        <activity android:name=".UnityEditActivity" />
-        <activity android:name=".BioLinkActivity" />
-        <activity android:name=".BioActivity" />
+        <activity android:name=".TextEditActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".UnityEditActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".BioLinkActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".BioActivity" android:screenOrientation="portrait" />
         <activity
             android:name=".ChangePasswordActivity"
             android:screenOrientation="portrait" />
