@@ -381,19 +381,19 @@ public class DualViewTypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     public Map<Integer,String> getHeadingTypeface() {
         Map<Integer, String> typefaceMap = new HashMap<>();
-        typefaceMap.put(Typeface.NORMAL, "fonts/GreycliffCF-Bold.ttf");
-        typefaceMap.put(Typeface.BOLD, "fonts/GreycliffCF-Heavy.ttf");
-        typefaceMap.put(Typeface.ITALIC, "fonts/GreycliffCF-Heavy.ttf");
-        typefaceMap.put(Typeface.BOLD_ITALIC, "fonts/GreycliffCF-Bold.ttf");
+        typefaceMap.put(Typeface.NORMAL, "fonts/arial.ttf");
+        typefaceMap.put(Typeface.BOLD, "fonts/arialbd.ttf");
+        typefaceMap.put(Typeface.ITALIC, "fonts/ariali.ttf");
+        typefaceMap.put(Typeface.BOLD_ITALIC, "fonts/arialbi.ttf");
         return typefaceMap;
     }
 
     public Map<Integer,String> getContentface() {
         Map<Integer, String> typefaceMap = new HashMap<>();
-        typefaceMap.put(Typeface.NORMAL,"fonts/Lato-Medium.ttf");
-        typefaceMap.put(Typeface.BOLD,"fonts/Lato-Bold.ttf");
-        typefaceMap.put(Typeface.ITALIC,"fonts/Lato-MediumItalic.ttf");
-        typefaceMap.put(Typeface.BOLD_ITALIC,"fonts/Lato-BoldItalic.ttf");
+        typefaceMap.put(Typeface.NORMAL,"fonts/arial.ttf");
+        typefaceMap.put(Typeface.BOLD,"fonts/arialbd.ttf");
+        typefaceMap.put(Typeface.ITALIC,"fonts/ariali.ttf");
+        typefaceMap.put(Typeface.BOLD_ITALIC,"fonts/arialbi.ttf");
         return typefaceMap;
     }
 
